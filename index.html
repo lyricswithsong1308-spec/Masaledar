@@ -169,13 +169,13 @@
       {id:102, name:"Spice Box", price:280, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/spice-box-1869844_960_720.jpg", desc:"Wooden spice box with compartments."},
       {id:103, name:"Kitchen Rack", price:600, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-rack-1869845_960_720.jpg", desc:"Stainless steel kitchen rack."},
       {id:104, name:"Bread Toaster", price:1500, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/bread-toaster-1869846_960_720.jpg", desc:"Electric bread toaster."},
-      {id:105, name:"Water Jug", price:350, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/water-jug-1869847_960_720.jpg", desc:"Plastic water jug with lid."},
-    
+      { id:105, name:"Water Jug", price:350, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/water-jug-1869847_960_720.jpg", desc:"Plastic water jug with lid." }
+      ]; // <-- important, close the array
 
-    ];
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      let cart = JSON.parse(localStorage.getItem("cart")) || [];
+      updateCartCount();
 
-    updateCartCount();
+
 
     function renderProducts(list) {
       document.getElementById("product-list").innerHTML = list.map(p=>`
@@ -227,5 +227,6 @@ let cart = JSON.parse(localStorage.getItem("cart")) || [];
   </script>
 </body>
 </html>
+
 
 
