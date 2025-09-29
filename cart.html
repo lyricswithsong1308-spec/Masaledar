@@ -1,85 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Cart - Yujani</title>
-  <style>
-    body { font-family: Arial, sans-serif; padding:20px; background:#fff;}
-    h1 { text-align:center; }
-    table { width:100%; border-collapse:collapse; margin-top:20px;}
-    th, td { border:1px solid #ddd; padding:10px; text-align:center; }
-    th { background:#f0f0f0; }
-    img { width:80px; height:80px; object-fit:cover; border-radius:5px;}
-    button { padding:5px 10px; border:none; background:black; color:white; cursor:pointer; border-radius:5px;}
-    button:hover { background:#444;}
-    .total { text-align:right; font-size:1.2em; margin-top:10px;}
-  </style>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Cart - Yujani</title>
 </head>
 <body>
+  <h1>Your Cart</h1>
+  <table border="1" cellpadding="10" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Item</th><th>Price</th><th>Qty</th><th>Total</th>
+      </tr>
+    </thead>
+    <tbody id="cart-body"></tbody>
+  </table>
+  <h3 id="grand-total"></h3>
+  <button onclick="checkout()">Proceed to Checkout</button>
 
-<h1>Your Cart</h1>
-<table id="cart-table">
-  <thead>
-    <tr>
-      <th>Image</th>
-      <th>Product</th>
-      <th>Price</th>
-      <th>Quantity</th>
-      <th>Subtotal</th>
-      <th>Remove</th>
-    </tr>
-  </thead>
-  <tbody></tbody>
-</table>
-<div class="total" id="total"></div>
-
-<button onclick="checkout()">Checkout</button>
-
-<script>
-  let productImages = {
-    "Jeera":"images/cumin.jpg",
-    "Turmeric":"images/turmeric-root-and-powder.jpg",
-    "Cinnamon":"images/Benefits of cinnamon.jpg"
-  };
-
-  function renderCart(){
-    let cart = JSON.parse(localStorage.getItem('cart'));
-    let tbody = document.querySelector('#cart-table tbody');
-    tbody.innerHTML = '';
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let tbody = document.getElementById("cart-body");
     let total = 0;
-    cart.forEach((item,index) => {
-      let subtotal = item.price * item.qty;
-      total += subtotal;
-      tbody.innerHTML += `
-        <tr>
-          <td><img src="${productImages[item.name]}" alt="${item.name}"></td>
-          <td>${item.name}</td>
-          <td>₹${item.price}</td>
-          <td>${item.qty}</td>
-          <td>₹${subtotal}</td>
-          <td><button onclick="removeItem(${index})">X</button></td>
-        </tr>
+
+    cart.forEach((item, i) => {
+      let row = document.createElement("tr");
+      row.innerHTML = `
+        <td>${item.name}</td>
+        <td>₹${item.price}</td>
+        <td><input type="number" value="${item.qty}" min="1" onchange="updateQty(${i}, this.value)"></td>
+        <td>₹${item.price * item.qty}</td>
       `;
+      tbody.appendChild(row);
+      total += item.price * item.qty;
     });
-    document.getElementById('total').innerText = 'Total: ₹' + total;
-  }
 
-  function removeItem(index){
-    let cart = JSON.parse(localStorage.getItem('cart'));
-    cart.splice(index,1);
-    localStorage.setItem('cart', JSON.stringify(cart));
-    renderCart();
-  }
+    document.getElementById("grand-total").innerText = "Grand Total: ₹" + total;
 
-  function checkout(){
-    alert("Thank you for your order! You can now submit this in Netlify form or handle manually.");
-    localStorage.removeItem('cart');
-    window.location.href = 'index.html';
-  }
+    function updateQty(index, qty){
+      cart[index].qty = parseInt(qty);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      location.reload();
+    }
 
-  renderCart();
-</script>
-
+    function checkout(){
+      window.location.href = "checkout.html";
+    }
+  </script>
 </body>
 </html>
+
