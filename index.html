@@ -5,153 +5,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yujani</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #fff;
-      color: #000;
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      padding: 20px;
-      text-align: center;
-      border-bottom: 2px solid #eee;
-    }
-    h1 {
-      font-size: 3em;
-      margin: 0;
-    }
-    .tagline {
-      font-size: 1.2em;
-      color: #444;
-    }
-    .search-bar {
-      margin: 20px auto;
-      text-align: center;
-    }
-    input[type="text"], input[type="number"] {
-      padding: 8px;
-      width: 90%;
-      margin: 5px 0;
-    }
-    .products {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      padding: 20px;
-    }
-    .product {
-      border: 1px solid #ddd;
-      border-radius: 8px;
-      padding: 15px;
-      width: 250px;
-      text-align: center;
-      background: #fafafa;
-    }
-    .product img {
-      width: 200px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 8px;
-    }
-    .product h3 {
-      margin: 10px 0 5px;
-    }
-    .product p {
-      font-size: 0.9em;
-      color: #555;
-    }
-    button {
-      margin-top: 10px;
-      padding: 10px 15px;
-      border: none;
-      background: black;
-      color: white;
-      cursor: pointer;
-      border-radius: 5px;
-    }
-    button:hover {
-      background: #444;
-    }
-    footer {
-      text-align: center;
-      padding: 20px;
-      margin-top: 20px;
-      background: #f0f0f0;
-    }
-    form h2 {
-      margin-bottom: 10px;
-    }
+    body { font-family: Arial, sans-serif; background:#fff; margin:0; padding:0;}
+    header { text-align:center; padding:20px; border-bottom:2px solid #eee;}
+    h1 { margin:0; font-size:3em; }
+    .tagline { font-size:1.2em; color:#444; }
+    .products { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px;}
+    .product { border:1px solid #ddd; border-radius:8px; padding:15px; width:250px; text-align:center; background:#fafafa;}
+    .product img { width:200px; height:200px; object-fit:cover; border-radius:8px; }
+    .product h3 { margin:10px 0 5px;}
+    .product p { font-size:0.9em; color:#555; }
+    button { margin-top:10px; padding:10px 15px; border:none; background:black; color:white; cursor:pointer; border-radius:5px;}
+    button:hover { background:#444;}
+    footer { text-align:center; padding:20px; background:#f0f0f0; margin-top:20px;}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Yujani</h1>
-    <p class="tagline">Your Own Masalas</p>
-  </header>
 
-  <div class="search-bar">
-    <input type="text" placeholder="Search spices...">
+<header>
+  <h1>Yujani</h1>
+  <p class="tagline">Your Own Masalas</p>
+</header>
+
+<section class="products">
+  <!-- Jeera -->
+  <div class="product">
+    <img src="images/cumin.jpg" alt="Jeera">
+    <h3>Jeera</h3>
+    <p>Pure and organic cumin seeds</p>
+    <p><strong>₹20</strong></p>
+    <button onclick="addToCart('Jeera', 20)">Add to Cart</button>
+    <button onclick="buyNow('Jeera', 20)">Buy Now</button>
   </div>
 
-  <section class="products">
-    <!-- Jeera -->
-    <div class="product">
-      <img src="images/cumin.jpg" alt="Jeera">
-      <h3>Jeera</h3>
-      <p>Pure and organic cumin seeds for your kitchen.</p>
-      <p><strong>₹20</strong></p>
-    </div>
+  <!-- Turmeric -->
+  <div class="product">
+    <img src="images/turmeric-root-and-powder.jpg" alt="Turmeric">
+    <h3>Turmeric</h3>
+    <p>Golden turmeric powder</p>
+    <p><strong>₹15</strong></p>
+    <button onclick="addToCart('Turmeric', 15)">Add to Cart</button>
+    <button onclick="buyNow('Turmeric', 15)">Buy Now</button>
+  </div>
 
-    <!-- Turmeric -->
-    <div class="product">
-      <img src="images/turmeric-root-and-powder.jpg" alt="Turmeric">
-      <h3>Turmeric</h3>
-      <p>Golden turmeric powder full of health benefits.</p>
-      <p><strong>₹15</strong></p>
-    </div>
+  <!-- Cinnamon -->
+  <div class="product">
+    <img src="images/Benefits of cinnamon.jpg" alt="Cinnamon">
+    <h3>Cinnamon</h3>
+    <p>Fresh cinnamon bark</p>
+    <p><strong>₹10</strong></p>
+    <button onclick="addToCart('Cinnamon', 10)">Add to Cart</button>
+    <button onclick="buyNow('Cinnamon', 10)">Buy Now</button>
+  </div>
+</section>
 
-    <!-- Cinnamon -->
-    <div class="product">
-      <img src="images/Benefits of cinnamon.jpg" alt="Cinnamon">
-      <h3>Cinnamon</h3>
-      <p>Fresh cinnamon bark with rich aroma and flavor.</p>
-      <p><strong>₹10</strong></p>
-    </div>
-  </section>
+<footer>
+  <p>© 2025 Yujani. All rights reserved.</p>
+</footer>
 
-  <!-- Combined Cart / Order Form -->
-  <section style="padding:20px; text-align:center;">
-    <form name="yujani-order" method="POST" data-netlify="true">
-      <input type="hidden" name="form-name" value="yujani-order">
-      <h2>Place Your Order</h2>
+<script>
+  // Initialize cart in localStorage
+  if(!localStorage.getItem('cart')) localStorage.setItem('cart', JSON.stringify([]));
 
-      <label>Jeera Quantity (₹20 each)</label>
-      <input type="number" name="jeera" min="0" value="0">
+  function addToCart(name, price){
+    let cart = JSON.parse(localStorage.getItem('cart'));
+    let item = cart.find(i => i.name === name);
+    if(item) item.qty += 1;
+    else cart.push({name, price, qty:1});
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert(name + " added to cart!");
+  }
 
-      <label>Turmeric Quantity (₹15 each)</label>
-      <input type="number" name="turmeric" min="0" value="0">
+  function buyNow(name, price){
+    // Clear cart and add only this item
+    let cart = [{name, price, qty:1}];
+    localStorage.setItem('cart', JSON.stringify(cart));
+    window.location.href = 'cart.html';
+  }
+</script>
 
-      <label>Cinnamon Quantity (₹10 each)</label>
-      <input type="number" name="cinnamon" min="0" value="0">
-
-      <hr style="margin:20px 0;">
-
-      <input type="text" name="name" placeholder="Your Name" required>
-      <input type="email" name="email" placeholder="Your Email" required>
-      <input type="text" name="address" placeholder="Shipping Address" required>
-
-      <button type="submit">Submit Order</button>
-    </form>
-  </section>
-  <form name="yujani-order" method="POST" data-netlify="true" action="/thank-you.html">
-
-
-  <footer>
-    <p>© 2025 Yujani. All rights reserved.</p>
-  </footer>
 </body>
 </html>
-
-
