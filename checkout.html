@@ -4,24 +4,96 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Checkout - Yujani</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      margin: 0;
+      padding: 0;
+    }
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: #fff;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+    h1 {
+      text-align: center;
+      color: #222;
+      margin-bottom: 20px;
+    }
+    h2 {
+      margin-top: 30px;
+      font-size: 18px;
+      color: #333;
+      border-bottom: 2px solid #eee;
+      padding-bottom: 5px;
+    }
+    label {
+      font-weight: bold;
+      display: block;
+      margin: 10px 0 5px;
+      color: #444;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      font-size: 14px;
+    }
+    textarea { resize: vertical; min-height: 60px; }
+    .btn {
+      width: 100%;
+      padding: 14px;
+      background: #ff6f00;
+      color: white;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+    .btn:hover {
+      background: #e65c00;
+    }
+    .order-box {
+      background: #fafafa;
+      padding: 12px;
+      border: 1px solid #eee;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+  </style>
 </head>
 <body>
-  <h1>Checkout</h1>
-  <form action="https://formspree.io/f/manpekpl" method="POST">
-    <label>Your Name:</label><br>
-    <input type="text" name="name" required><br><br>
+  <div class="container">
+    <h1>Checkout</h1>
+    <form action="https://formspree.io/f/manpekpl" method="POST">
+      
+      <h2>Customer Details</h2>
+      <label>Your Name:</label>
+      <input type="text" name="name" required>
 
-    <label>Email:</label><br>
-    <input type="email" name="email" required><br><br>
+      <label>Email:</label>
+      <input type="email" name="email" required>
 
-    <label>Address:</label><br>
-    <textarea name="address" required></textarea><br><br>
+      <h2>Delivery Address</h2>
+      <label>Address:</label>
+      <textarea name="address" required></textarea>
 
-    <label>Order Summary:</label><br>
-    <textarea name="order" id="order-summary" readonly></textarea><br><br>
+      <h2>Order Summary</h2>
+      <div class="order-box" id="order-summary"></div>
+      <textarea name="order" id="order-field" hidden></textarea>
 
-    <button type="submit">Place Order</button>
-  </form>
+      <button class="btn" type="submit">Place Order</button>
+    </form>
+  </div>
 
   <script>
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
@@ -34,7 +106,9 @@
     });
 
     summary += `\nTotal: ₹${total}`;
-    document.getElementById("order-summary").value = summary;
+    document.getElementById("order-summary").innerText = summary;
+    document.getElementById("order-field").value = summary;
   </script>
 </body>
 </html>
+
