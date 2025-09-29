@@ -3,104 +3,151 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Masaledar - Your Own Masalas</title>
+  <title>Yujani</title>
   <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Arial', sans-serif; }
-    body { background-color: #fff; color: #000; }
-
-    /* Header */
+    body {
+      font-family: Arial, sans-serif;
+      background: #fff;
+      color: #000;
+      margin: 0;
+      padding: 0;
+    }
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 50px;
-      border-bottom: 1px solid #ddd;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #eee;
     }
-    header h1 { font-size: 2em; font-weight: bold; }
-    .search-box {
-      display: flex;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      overflow: hidden;
+    h1 {
+      font-size: 3em;
+      margin: 0;
     }
-    .search-box input { padding: 8px 12px; border: none; outline: none; width: 300px; }
-    .search-box button { padding: 8px 12px; background-color: #000; color: #fff; border: none; cursor: pointer; }
-
-    /* Main Section */
-    main {
-      padding: 40px 50px;
+    .tagline {
+      font-size: 1.2em;
+      color: #444;
+    }
+    .search-bar {
+      margin: 20px auto;
       text-align: center;
     }
-    main h2 { font-size: 1.8em; margin-bottom: 30px; }
-
-    /* Products */
+    input[type="text"], input[type="number"] {
+      padding: 8px;
+      width: 90%;
+      margin: 5px 0;
+    }
     .products {
       display: flex;
       justify-content: center;
-      gap: 30px;
       flex-wrap: wrap;
+      gap: 20px;
+      padding: 20px;
     }
     .product {
       border: 1px solid #ddd;
-      padding: 20px;
       border-radius: 8px;
-      width: 180px;
-      transition: 0.3s;
+      padding: 15px;
+      width: 250px;
       text-align: center;
+      background: #fafafa;
     }
-    .product:hover { box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
-    .product img { width: 120px; height: 120px; object-fit: cover; margin-bottom: 15px; border-radius: 8px; }
-    .product h3 { margin-bottom: 10px; font-size: 1.2em; }
-    .product p { font-size: 1em; font-weight: bold; }
-
-    /* Footer */
-    footer {
-      margin-top: 50px;
-      padding: 20px;
-      text-align: center;
+    .product img {
+      width: 200px;
+      height: 200px;
+      object-fit: cover;
+      border-radius: 8px;
+    }
+    .product h3 {
+      margin: 10px 0 5px;
+    }
+    .product p {
       font-size: 0.9em;
-      color: #777;
-      border-top: 1px solid #ddd;
+      color: #555;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px 15px;
+      border: none;
+      background: black;
+      color: white;
+      cursor: pointer;
+      border-radius: 5px;
+    }
+    button:hover {
+      background: #444;
+    }
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 20px;
+      background: #f0f0f0;
+    }
+    form h2 {
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-
-  <!-- Header -->
   <header>
-    <h1>Masaledar</h1>
-    <div class="search-box">
-      <input type="text" placeholder="Search for products...">
-      <button>Search</button>
-    </div>
+    <h1>Yujani</h1>
+    <p class="tagline">Your Own Masalas</p>
   </header>
 
-  <!-- Main Content -->
-  <main>
-    <h2>Your Own Masalas</h2>
-    <div class="products">
-      <div class="product">
-        <img src="images/cumin.jpg" alt="Jeera">
-        <h3>Jeera</h3>
-        <p>₹20</p>
-      </div>
-      <div class="product">
-        <img src="images\turmeric-root-and-powder.jpg" alt="Turmeric">
-        <h3>Turmeric</h3>
-        <p>₹15</p>
-      </div>
-      <div class="product">
-        <img src="images\Benefits of cinnamon.jpg" alt="Cinnamon">
-        <h3>Cinnamon</h3>
-        <p>₹10</p>
-      </div>
+  <div class="search-bar">
+    <input type="text" placeholder="Search spices...">
+  </div>
+
+  <section class="products">
+    <!-- Jeera -->
+    <div class="product">
+      <img src="images/cumin--jeera-942082_l.jpg" alt="Jeera">
+      <h3>Jeera</h3>
+      <p>Pure and organic cumin seeds for your kitchen.</p>
+      <p><strong>₹20</strong></p>
     </div>
-  </main>
 
-  <!-- Footer -->
+    <!-- Turmeric -->
+    <div class="product">
+      <img src="images/turmeric-powder.webp" alt="Turmeric">
+      <h3>Turmeric</h3>
+      <p>Golden turmeric powder full of health benefits.</p>
+      <p><strong>₹15</strong></p>
+    </div>
+
+    <!-- Cinnamon -->
+    <div class="product">
+      <img src="images/bark-Cinnamomum-cassia-plant-spice.webp" alt="Cinnamon">
+      <h3>Cinnamon</h3>
+      <p>Fresh cinnamon bark with rich aroma and flavor.</p>
+      <p><strong>₹10</strong></p>
+    </div>
+  </section>
+
+  <!-- Combined Cart / Order Form -->
+  <section style="padding:20px; text-align:center;">
+    <form name="yujani-order" method="POST" data-netlify="true">
+      <input type="hidden" name="form-name" value="yujani-order">
+      <h2>Place Your Order</h2>
+
+      <label>Jeera Quantity (₹20 each)</label>
+      <input type="number" name="jeera" min="0" value="0">
+
+      <label>Turmeric Quantity (₹15 each)</label>
+      <input type="number" name="turmeric" min="0" value="0">
+
+      <label>Cinnamon Quantity (₹10 each)</label>
+      <input type="number" name="cinnamon" min="0" value="0">
+
+      <hr style="margin:20px 0;">
+
+      <input type="text" name="name" placeholder="Your Name" required>
+      <input type="email" name="email" placeholder="Your Email" required>
+      <input type="text" name="address" placeholder="Shipping Address" required>
+
+      <button type="submit">Submit Order</button>
+    </form>
+  </section>
+
   <footer>
-    &copy; 2025 Masaledar. All rights reserved.
+    <p>© 2025 Yujani. All rights reserved.</p>
   </footer>
-
 </body>
 </html>
