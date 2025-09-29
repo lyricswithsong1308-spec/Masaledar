@@ -1,72 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Yujani - Your Own Masalas</title>
+  <title>Yujani Store</title>
   <style>
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#fff; }
-    header { display:flex; justify-content:space-between; align-items:center; padding:15px 30px; border-bottom:2px solid #eee; }
-    h1 { margin:0; font-size:2em; }
-    .tagline { font-size:1em; color:#555; }
-    .cart-icon { cursor:pointer; font-size:1.2em; }
-    .products { display:flex; flex-wrap:wrap; justify-content:center; gap:20px; padding:20px; }
-    .product { border:1px solid #ddd; border-radius:8px; padding:15px; width:250px; text-align:center; background:#fafafa; }
-    .product img { width:200px; height:200px; object-fit:cover; border-radius:8px; }
-    button { margin:5px; padding:8px 12px; border:none; border-radius:6px; cursor:pointer; }
-    .buy { background:#28a745; color:white; }
-    .cart { background:#007bff; color:white; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
+    header { background: #ff6f00; padding: 15px; display: flex; justify-content: space-between; align-items: center; color: white; }
+    header h1 { margin: 0; }
+    .search-box input { padding: 8px; border: none; border-radius: 6px; width: 200px; }
+    .cart-icon { cursor: pointer; font-size: 20px; position: relative; }
+    .cart-count {
+      position: absolute; top: -8px; right: -8px;
+      background: white; color: #ff6f00; font-size: 12px;
+      border-radius: 50%; padding: 2px 6px; font-weight: bold;
+    }
+    .products { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 20px; padding: 20px; }
+    .product {
+      background: #fff; padding: 15px; border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1); text-align: center;
+      cursor: pointer; transition: transform 0.2s;
+    }
+    .product:hover { transform: scale(1.03); }
+    .product img { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; }
+    .product h3 { margin: 10px 0; }
+    .btn { background: #ff6f00; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; }
+    /* Popup */
+    .popup {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.6); display: flex; justify-content: center; align-items: center;
+      visibility: hidden; opacity: 0; transition: 0.3s;
+    }
+    .popup.active { visibility: visible; opacity: 1; }
+    .popup-content {
+      background: white; padding: 20px; border-radius: 12px; max-width: 400px;
+      text-align: left; box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    .popup-content img { width: 100%; border-radius: 8px; }
+    .popup-content h2 { margin: 10px 0; }
+    .popup-content p { font-size: 14px; color: #555; }
+    .close-btn { background: red; color: white; border: none; padding: 6px 12px; border-radius: 5px; float: right; cursor: pointer; }
   </style>
 </head>
 <body>
   <header>
-    <div>
-      <h1>Yujani</h1>
-      <p class="tagline">Your Own Masalas</p>
-    </div>
-    <div class="cart-icon" onclick="location.href='cart.html'">🛒 Cart</div>
+    <h1>🛒 Yujani Store</h1>
+    <div class="search-box"><input type="text" id="search" placeholder="Search products..."></div>
+    <div class="cart-icon" onclick="window.location='cart.html'">🛒<span class="cart-count" id="cart-count">0</span></div>
   </header>
 
-  <section class="products">
-    <div class="product">
-      <img src="images/cumin.jpg" alt="Jeera">
-      <h2>Jeera</h2>
-      <p>₹20</p>
-      <button class="buy" onclick="buyNow('Jeera',20)">Buy Now</button>
-      <button class="cart" onclick="addToCart('Jeera',20)">Add to Cart</button>
+  <div class="products" id="product-list"></div>
+
+  <!-- Popup -->
+  <div class="popup" id="popup">
+    <div class="popup-content">
+      <button class="close-btn" onclick="closePopup()">X</button>
+      <img id="popup-img" src="">
+      <h2 id="popup-title"></h2>
+      <p id="popup-desc"></p>
+      <button class="btn" onclick="addToCartFromPopup()">Add to Cart</button>
     </div>
-    <div class="product">
-      <img src="images/turmeric-root-and-powder.jpg" alt="Turmeric">
-      <h2>Turmeric</h2>
-      <p>₹15</p>
-      <button class="buy" onclick="buyNow('Turmeric',15)">Buy Now</button>
-      <button class="cart" onclick="addToCart('Turmeric',15)">Add to Cart</button>
-    </div>
-    <div class="product">
-      <img src="images/Benefits of cinnamon.jpg" alt="Cinnamon">
-      <h2>Cinnamon</h2>
-      <p>₹10</p>
-      <button class="buy" onclick="buyNow('Cinnamon',10)">Buy Now</button>
-      <button class="cart" onclick="addToCart('Cinnamon',10)">Add to Cart</button>
-    </div>
-  </section>
+  </div>
 
   <script>
-    function addToCart(name, price){
-      let cart = JSON.parse(localStorage.getItem("cart")) || [];
-      let item = cart.find(i => i.name === name);
-      if(item){ item.qty += 1; }
-      else{ cart.push({name, price, qty:1}); }
-      localStorage.setItem("cart", JSON.stringify(cart));
-      alert(name + " added to cart!");
-    }
+    const products = [
+      {id:1, name:"Turmeric", price:50, img:"https://via.placeholder.com/200x150?text=Turmeric", desc:"Pure turmeric sourced from Kerala farmers."},
+      {id:2, name:"Jeera", price:70, img:"https://via.placeholder.com/200x150?text=Jeera", desc:"Premium cumin seeds from Rajasthan."},
+      {id:3, name:"Rice", price:90, img:"https://via.placeholder.com/200x150?text=Rice", desc:"Organic basmati rice from Punjab."}
+    ];
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    updateCartCount();
 
-    function buyNow(name, price){
-      // Save only this item for checkout
-      let cart = [{name, price, qty:1}];
-      localStorage.setItem("cart", JSON.stringify(cart));
-      window.location.href = "checkout.html";
+    function renderProducts(list) {
+      document.getElementById("product-list").innerHTML = list.map(p=>`
+        <div class="product" onclick="openPopup(${p.id})">
+          <img src="${p.img}">
+          <h3>${p.name}</h3>
+          <p>₹${p.price}</p>
+          <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
+        </div>`).join("");
     }
+    renderProducts(products);
+
+    function openPopup(id) {
+      let p = products.find(x=>x.id===id);
+      document.getElementById("popup-img").src = p.img;
+      document.getElementById("popup-title").innerText = p.name;
+      document.getElementById("popup-desc").innerText = p.desc;
+      document.getElementById("popup").classList.add("active");
+      localStorage.setItem("selectedProduct", JSON.stringify(p));
+    }
+    function closePopup(){ document.getElementById("popup").classList.remove("active"); }
+    function addToCartFromPopup(){ let p = JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup(); }
+
+    function addToCart(id){
+      let p = products.find(x=>x.id===id);
+      let item = cart.find(x=>x.id===id);
+      if(item){ item.qty++; } else { cart.push({...p, qty:1}); }
+      localStorage.setItem("cart", JSON.stringify(cart));
+      updateCartCount();
+      alert(`${p.name} added to cart`);
+    }
+    function updateCartCount(){ document.getElementById("cart-count").innerText = cart.reduce((a,b)=>a+b.qty,0); }
+
+    document.getElementById("search").addEventListener("input", e=>{
+      let term = e.target.value.toLowerCase();
+      renderProducts(products.filter(p=>p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
+    });
   </script>
 </body>
 </html>
+
