@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Checkout - Yujani</title>
+</head>
+<body>
+  <h1>Checkout</h1>
+  <form action="https://formspree.io/f/manpekpl" method="POST">
+    <label>Your Name:</label><br>
+    <input type="text" name="name" required><br><br>
+
+    <label>Email:</label><br>
+    <input type="email" name="email" required><br><br>
+
+    <label>Address:</label><br>
+    <textarea name="address" required></textarea><br><br>
+
+    <label>Order Summary:</label><br>
+    <textarea name="order" id="order-summary" readonly></textarea><br><br>
+
+    <button type="submit">Place Order</button>
+  </form>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let summary = "";
+    let total = 0;
+
+    cart.forEach(item => {
+      summary += `${item.name} - ${item.qty} x ₹${item.price} = ₹${item.price * item.qty}\n`;
+      total += item.price * item.qty;
+    });
+
+    summary += `\nTotal: ₹${total}`;
+    document.getElementById("order-summary").value = summary;
+  </script>
+</body>
+</html>
