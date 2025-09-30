@@ -29,6 +29,42 @@ header h1 { margin: 0; }
 footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif; }
 footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
 .search-box input { padding: 6px 10px; border-radius: 6px; border: none; width: 180px; }
+  <!-- Add this below your search input -->
+<div id="search-suggestions" style="position:absolute; background:white; border:1px solid #ccc; max-height:200px; overflow-y:auto; width:180px; display:none; z-index:1000;"></div>
+// Search functionality
+const searchInput = document.getElementById("search");
+const suggestionsBox = document.getElementById("search-suggestions");
+
+searchInput.addEventListener("input", e => {
+    let term = e.target.value.toLowerCase();
+    if(term === "") {
+        suggestionsBox.style.display = "none";
+        renderProducts(products); // show all
+        return;
+    }
+
+    let matches = products.filter(p => p.name.toLowerCase().includes(term) || (p.desc && p.desc.toLowerCase().includes(term)));
+    renderProducts(matches);
+
+    // Show suggestions dropdown
+    suggestionsBox.innerHTML = matches.map(p => `<div class="suggestion-item" style="padding:5px; cursor:pointer;" onclick="selectSuggestion('${p.name}')">${p.name}</div>`).join("");
+    suggestionsBox.style.display = matches.length ? "block" : "none";
+});
+
+function selectSuggestion(name) {
+    searchInput.value = name;
+    suggestionsBox.style.display = "none";
+    let filtered = products.filter(p => p.name === name);
+    renderProducts(filtered);
+}
+
+// Hide suggestions when clicking outside
+document.addEventListener("click", e => {
+    if(!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)) {
+        suggestionsBox.style.display = "none";
+    }
+});
+
 .cart-icon { cursor: pointer; font-size: 20px; position: relative; margin-left: 10px; }
 .cart-count { position: absolute; top: -8px; right: -8px; background: white; color: #ff6f00; font-size: 12px; border-radius: 50%; padding: 2px 6px; font-weight: bold; }
 </style>
@@ -141,4 +177,5 @@ let heroIndex=0; const slides=document.querySelectorAll('.hero-carousel img'); f
 </script>
 </body>
 </html>
+
 
