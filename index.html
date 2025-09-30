@@ -36,12 +36,60 @@
     .cart-icon { cursor:pointer; font-size:20px; position:relative; margin-left:10px; }
     .cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
 
-    /* Cart Sidebar */
-    #cart-sidebar { position:fixed; top:0; right:-350px; width:350px; height:100%; background:#fff; box-shadow:-3px 0 8px rgba(0,0,0,0.2); transition:0.3s; z-index:10000; padding:20px; overflow-y:auto; }
-    #cart-sidebar.active { right:0; }
-    #cart-sidebar h2 { margin-top:0; }
-    .cart-item { margin-bottom:15px; }
-    .cart-item button { margin-left:5px; cursor:pointer; }
+<style>
+/* Cart Sidebar */
+#cart-sidebar { 
+    position: fixed; 
+    top: 0; 
+    right: -350px; /* hidden by default */
+    width: 350px; 
+    height: 100%; 
+    background: #fff; 
+    box-shadow: -3px 0 8px rgba(0,0,0,0.2); 
+    transition: right 0.4s ease; /* smooth slide */
+    z-index: 10000; 
+    padding: 20px; 
+    overflow-y: auto; 
+}
+#cart-sidebar.active { 
+    right: 0; 
+}
+
+/* Overlay */
+#cart-overlay {
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background: rgba(0,0,0,0);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, background 0.4s ease;
+    z-index: 9999;
+}
+#cart-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    background: rgba(0,0,0,0.5);
+}
+</style>
+
+<script>
+// Cart Icon Click
+document.querySelector(".cart-icon").addEventListener("click", () => {
+    renderCartSidebar();
+    cartSidebar.classList.add("active");
+    document.getElementById("cart-overlay").classList.add("active");
+});
+
+// Close Cart
+function closeCart(){
+    cartSidebar.classList.remove("active");
+    document.getElementById("cart-overlay").classList.remove("active");
+}
+</script>
+
 
     /* Overlay */
     #cart-overlay {
@@ -283,4 +331,5 @@ setInterval(showSlide,4000);
 
 </body>
 </html>
+
 
