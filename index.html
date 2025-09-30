@@ -1,328 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
-  <meta name="description" content="Yujanii Store offers high-quality masalas and kitchen accessories in Bihar. Order online and get fast delivery.">
-  <meta name="keywords" content="masala online Bihar, spices Patna, kitchen accessories Bihar, Yujanii store, buy masala online India">
-  <meta name="robots" content="index, follow">
+<meta charset="UTF-8">
+<title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Buy premium spices and kitchen tools online. Fast delivery in Bihar.">
 
-  <!-- Google Adsense -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9618242657345225"
-     crossorigin="anonymous"></script>
-  <ins class="adsbygoogle"
-       style="display:block; text-align:center;"
-       data-ad-layout="in-article"
-       data-ad-format="fluid"
-       data-ad-client="ca-pub-9618242657345225"
-       data-ad-slot="4393591135"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+<style>
+  body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
+  header { background: #ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; position:sticky; top:0; z-index:999; }
+  header h1 { margin:0; font-size:24px; cursor:pointer; }
+  .search-box input { padding:8px; border:none; border-radius:6px; width:200px; }
+  .cart-icon { cursor:pointer; font-size:20px; position:relative; }
+  .cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
 
-  <!-- Styles -->
-  <style>
-    /* Reset and body */
-    body { font-family: Arial, sans-serif; margin:0; padding:0; background:#f5f5f5; }
-    a { text-decoration:none; }
+  /* Hero carousel */
+  .hero-carousel { position:relative; overflow:hidden; max-height:300px; margin-top:10px; }
+  .hero-carousel img { width:100%; display:none; border-radius:8px; }
+  .hero-carousel img.active { display:block; }
 
-    /* Navbar */
-    header { background:#ff6f00; color:white; display:flex; justify-content:space-between; align-items:center; padding:15px 20px; position:sticky; top:0; z-index:100; }
-    .navbar a { color:white; margin:0 10px; font-weight:bold; }
-    .search-box input { padding:8px; border-radius:6px; border:none; width:200px; }
-    .cart-icon { cursor:pointer; position:relative; font-size:20px; }
-    .cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
+  /* Product grid */
+  .products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
+  .product { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; cursor:pointer; transition: transform 0.2s; }
+  .product:hover { transform: scale(1.03); }
+  .product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
+  .btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
 
-    /* Hero Banner */
-    .hero-carousel { display:flex; overflow:hidden; margin-top:10px; }
-    .hero-carousel img { width:100%; height:300px; object-fit:cover; border-radius:8px; margin:0 5px; transition:transform 0.3s; }
-    .hero-carousel img:hover { transform:scale(1.02); }
+  /* Popup */
+  .popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
+  .popup.active { visibility:visible; opacity:1; }
+  .popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+  .popup-content img { width:100%; border-radius:8px; }
+  .popup-content h2 { margin:10px 0; }
+  .popup-content p { font-size:14px; color:#555; }
+  .close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; float:right; cursor:pointer; }
 
-    /* Products Grid */
-    .products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
-    .product { background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; padding:15px; cursor:pointer; transition:transform 0.2s; }
-    .product:hover { transform:scale(1.03); }
-    .product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
-    .product h3 { margin:10px 0; }
-    .btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+  /* Slide-in Cart */
+  #cart-sidebar { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#fff; box-shadow:-2px 0 10px rgba(0,0,0,0.2); transition:right 0.3s; z-index:1000; padding:20px; overflow-y:auto; }
+  #cart-sidebar h2 { margin-top:0; }
 
-    /* Popup */
-    .popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
-    .popup.active { visibility:visible; opacity:1; }
-    .popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); position:relative; }
-    .popup-content img { width:100%; border-radius:8px; }
-    .popup-content h2 { margin:10px 0; }
-    .popup-content p { font-size:14px; color:#555; }
-    .close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; position:absolute; top:10px; right:10px; cursor:pointer; }
-
-    /* Articles/Blogs */
-    article { padding:20px; max-width:800px; margin:auto; background:#fff; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.05); margin-bottom:20px; }
-
-    /* Footer */
-    footer { background:#333; color:white; padding:20px 0; text-align:center; }
-    footer a { color:#1a73e8; margin:0 10px; }
-    footer form input[type=email] { padding:8px; width:200px; border-radius:6px; border:none; margin-top:10px; }
-    footer form button { padding:8px 12px; background:#ff6f00; color:white; border:none; border-radius:6px; cursor:pointer; margin-top:10px; }
-  </style>
+  /* Footer */
+  footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial,sans-serif; margin-top:20px; }
+  footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
+</style>
 </head>
-
 <body>
-  <!-- Header -->
-  <header>
-    <h1>🛒 Yujanii Store</h1>
-    <div class="search-box"><input type="text" id="search" placeholder="Search products..."></div>
-    <div class="cart-icon" onclick="window.location='cart.html'">🛒<span class="cart-count" id="cart-count">0</span></div>
-  </header>
 
-  <!-- Hero Banner -->
-  <section class="hero-carousel">
-    <img src="banner1.jpg" alt="Fresh Masalas">
-    <img src="banner2.jpg" alt="Kitchen Accessories">
-  </section>
+<header>
+  <h1 onclick="window.location='/index.html'">🛒 Yujanii Store</h1>
+  <div class="search-box"><input type="text" id="search" placeholder="Search products..."></div>
+  <div class="cart-icon">🛒<span class="cart-count" id="cart-count">0</span></div>
+</header>
 
-  <!-- Products Grid -->
-  <div class="products" id="product-list"></div>
+<!-- Hero Carousel -->
+<section class="hero-carousel">
+  <img src="banner1.jpg" alt="Fresh Masalas" class="active">
+  <img src="banner2.jpg" alt="Kitchen Accessories">
+</section>
 
-  <!-- Popup -->
-  <div class="popup" id="popup">
-    <div class="popup-content">
-      <button class="close-btn" onclick="closePopup()">X</button>
-      <img id="popup-img" src="">
-      <h2 id="popup-title"></h2>
-      <p id="popup-desc"></p>
-      <button class="btn" onclick="addToCartFromPopup()">Add to Cart</button>
-    </div>
+<!-- Product Grid -->
+<section class="products" id="product-list"></section>
+
+<!-- Product Popup -->
+<div class="popup" id="popup">
+  <div class="popup-content">
+    <button class="close-btn" onclick="closePopup()">X</button>
+    <img id="popup-img" src="">
+    <h2 id="popup-title"></h2>
+    <p id="popup-desc"></p>
+    <button class="btn" onclick="addToCartFromPopup()">Add to Cart</button>
   </div>
+</div>
 
-  <!-- Example Blogs / Recipes -->
-  <article>
-    <h1>How to Make Chole Without Onion & Garlic – Using Yujanii Masala</h1>
-    <p>In Bihar, many families prefer cooking without onion and garlic. With <strong>Yujanii Garam Masala</strong>, you can still enjoy delicious <em>chole</em> full of flavor.</p>
-    <h2>Ingredients</h2>
-    <ul>
-      <li>1 cup boiled chickpeas (chole)</li>
-      <li>2 tomatoes (pureed)</li>
-      <li>1 tsp ginger paste</li>
-      <li>2 tsp Yujanii Garam Masala</li>
-      <li>1 tsp cumin seeds</li>
-      <li>2 tbsp oil</li>
-      <li>Salt to taste</li>
-    </ul>
-    <h2>Method</h2>
-    <ol>
-      <li>Heat oil in a pan and add cumin seeds.</li>
-      <li>Add tomato puree and cook until oil separates.</li>
-      <li>Add ginger paste and stir well.</li>
-      <li>Mix in <strong>Yujanii Garam Masala</strong> and salt.</li>
-      <li>Add boiled chickpeas, cook for 5–10 minutes, garnish with coriander leaves.</li>
-    </ol>
-    <p><strong>👉 Order your Yujanii Garam Masala today and bring authentic taste to your meals!</strong></p>
-  </article>
+<!-- Slide-In Cart Sidebar -->
+<div id="cart-sidebar">
+  <button onclick="closeCart()" style="float:right; background:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">X</button>
+  <h2>🛒 Your Cart</h2>
+  <div id="cart-items"></div>
+  <h3>Total: ₹<span id="cart-total">0</span></h3>
+  <button onclick="checkout()" style="width:100%; padding:10px; background:#ff6f00; color:white; border:none; border-radius:5px; cursor:pointer;">Checkout</button>
+</div>
 
-  <article>
-    <h1>5 Spices Every Bihari Kitchen Needs</h1>
-    <p>Here are the top 5 spices every Bihari kitchen must have – all available at <strong>Yujanii Store</strong>.</p>
-    <h2>1. Garam Masala</h2>
-    <p>Freshly ground for the best aroma.</p>
-    <h2>2. Turmeric (Haldi)</h2>
-    <p>Used daily in dal and vegetables.</p>
-    <h2>3. Cumin (Jeera)</h2>
-    <p>Essential for <em>tadka</em> in dals and subzis.</p>
-    <h2>4. Mustard Seeds (Sarson)</h2>
-    <p>Perfect for pickles and chutneys.</p>
-    <h2>5. Red Chilli Powder (Lal Mirch)</h2>
-    <p>For that perfect spice kick.</p>
-    <p><strong>👉 Explore our masala collection today!</strong></p>
-  </article>
+<!-- Footer -->
+<footer>
+  <p>&copy; 2025 Yujanii Store. All rights reserved.</p>
+  <p>
+    <a href="/privacy.html">Privacy Policy</a> |
+    <a href="/terms.html">Terms & Conditions</a> |
+    <a href="/contact.html">Contact Us</a>
+  </p>
+  <p>
+    Follow us:
+    <a href="https://instagram.com">Instagram</a> |
+    <a href="https://facebook.com">Facebook</a>
+  </p>
+</footer>
 
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 Yujanii Store. All rights reserved.</p>
-    <p>
-      <a href="/privacy.html">Privacy Policy</a> |
-      <a href="/terms.html">Terms & Conditions</a> |
-      <a href="/contact.html">Contact Us</a>
-    </p>
-    <p>Follow us: 
-      <a href="https://instagram.com">Instagram</a> | 
-      <a href="https://facebook.com">Facebook</a>
-    </p>
-    <form action="https://formspree.io/f/mnngdzvl" method="POST">
-      <input type="hidden" name="_redirect" value="https://yujanii.vercel.app/thankyou.html">
-      <input type="email" name="email" placeholder="Subscribe for updates" required>
-      <button type="submit">Subscribe</button>
-    </form>
-  </footer>
+<script>
+const products = [
+  {id:1,name:"Turmeric",price:50,img:"images/turmeric-root-and-powder.jpg"},
+  {id:2,name:"Jeera",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/jeera-1869745_960_720.jpg",desc:"Premium cumin seeds from Rajasthan."},
+  {id:3,name:"Cinnamon",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cinnamon-1869746_960_720.jpg",desc:"Organic cinnamon sticks from Kerala."},
+  {id:4,name:"Cloves",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cloves-1869747_960_720.jpg",desc:"Fresh cloves harvested from Kerala."},
+  {id:5,name:"Cardamom",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cardamom-1869748_960_720.jpg",desc:"Green cardamom pods from Sikkim."},
+  {id:6,name:"Mustard Seeds",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mustard-seeds-1869749_960_720.jpg",desc:"Yellow mustard seeds from Bihar."},
+  {id:7,name:"Coriander Seeds",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/coriander-seeds-1869750_960_720.jpg",desc:"Coriander seeds from Madhya Pradesh."},
+  {id:8,name:"Fennel Seeds",price:55,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fennel-seeds-1869751_960_720.jpg",desc:"Fennel seeds from Gujarat."},
+  {id:9,name:"Fenugreek Seeds",price:50,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fenugreek-seeds-1869752_960_720.jpg",desc:"Fenugreek seeds from Rajasthan."},
+  {id:10,name:"Saffron",price:1500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/saffron-1869753_960_720.jpg",desc:"Premium saffron from Kashmir."},
+  {id:11,name:"Salt",price:30,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-1869754_960_720.jpg",desc:"Himalayan pink salt."},
+  {id:12,name:"Pepper",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-1869755_960_720.jpg",desc:"Black pepper from Kerala."},
+  {id:13,name:"Chili Powder",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chili-powder-1869756_960_720.jpg",desc:"Red chili powder from Andhra Pradesh."},
+  {id:14,name:"Garam Masala",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/garam-masala-1869757_960_720.jpg",desc:"Homemade garam masala blend."},
+  {id:15,name:"Kitchen Knife",price:250,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-knife-1869758_960_720.jpg",desc:"Stainless steel kitchen knife."},
+  {id:16,name:"Chopping Board",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chopping-board-1869759_960_720.jpg",desc:"Wooden chopping board."},
+  {id:17,name:"Spice Rack",price:500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/spice-rack-1869760_960_720.jpg",desc:"Wall-mounted spice rack."},
+  {id:18,name:"Measuring Spoons",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-spoons-1869761_960_720.jpg",desc:"Set of stainless steel measuring spoons."},
+  {id:19,name:"Mortar and Pestle",price:200,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mortar-and-pestle-1869762_960_720.jpg",desc:"Stone mortar and pestle."},
+  {id:20,name:"Tea Infuser",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/tea-infuser-1869763_960_720.jpg",desc:"Stainless steel tea infuser."},
+  {id:21,name:"Salt Shaker",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-shaker-1869764_960_720.jpg",desc:"Glass salt shaker."},
+  {id:22,name:"Pepper Mill",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-mill-1869765_960_720.jpg",desc:"Wooden pepper mill."},
+  {id:23,name:"Mixing Bowl",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mixing-bowl-1869766_960_720.jpg",desc:"Stainless steel mixing bowl."},
+  {id:24,name:"Whisk",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/whisk-1869767_960_720.jpg",desc:"Stainless steel kitchen whisk."},
+  {id:25,name:"Peeler",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/peeler-1869768_960_720.jpg",desc:"Vegetable peeler."},
+  {id:26,name:"Grater",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/grater-1869769_960_720.jpg",desc:"Metal kitchen grater."},
+  {id:27,name:"Measuring Cups",price:110,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-cups-1869770_960_720.jpg",desc:"Plastic measuring cup set."},
+  {id:28,name:"Rolling Pin",price:130,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/rolling-pin-1869771_960_720.jpg",desc:"Wooden rolling pin."},
+  {id:29,name:"Kitchen Scissors",price:140,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-scissors-1869772_960_720.jpg",desc:"Stainless steel kitchen scissors."}
+];
 
-  <!-- Scripts -->
-  <script>
-    // Product list
-    const products = [
-      {id:1, name:"Turmeric", price:50, img:"images/turmeric-root-and-powder.jpg", desc:"Fresh turmeric root and powder."},
-      {id:2, name:"Jeera", price:70, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/jeera-1869745_960_720.jpg", desc:"Premium cumin seeds."},
-      {id:3, name:"Cinnamon", price:90, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cinnamon-1869746_960_720.jpg", desc:"Organic cinnamon sticks."},
-      {id:4, name:"Cloves", price:80, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cloves-1869747_960_720.jpg", desc:"Fresh cloves."},
-      {id:5, name:"Cardamom", price:120, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cardamom-1869748_960_720.jpg", desc:"Green cardamom pods."},
-      {id:6, name:"Mustard Seeds", price:40, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mustard-seeds-1869749_960_720.jpg", desc:"Yellow mustard seeds."},
-      {id:7, name:"Coriander Seeds", price:60, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/coriander-seeds-1869750_960_720.jpg", desc:"Coriander seeds."},
-      {id:8, name:"Fennel Seeds", price:55, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fennel-seeds-1869751_960_720.jpg", desc:"Fennel seeds from Gujarat."},
-{id:9, name:"Fenugreek Seeds", price:50, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fenugreek-seeds-1869752_960_720.jpg", desc:"Fenugreek seeds from Rajasthan."},
-{id:10, name:"Saffron", price:1500, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/saffron-1869753_960_720.jpg", desc:"Premium saffron from Kashmir."},
-{id:11, name:"Salt", price:30, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-1869754_960_720.jpg", desc:"Himalayan pink salt."},
-{id:12, name:"Pepper", price:100, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-1869755_960_720.jpg", desc:"Black pepper from Kerala."},
-{id:13, name:"Chili Powder", price:40, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chili-powder-1869756_960_720.jpg", desc:"Red chili powder from Andhra Pradesh."},
-{id:14, name:"Garam Masala", price:90, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/garam-masala-1869757_960_720.jpg", desc:"Homemade garam masala blend."},
-{id:15, name:"Kitchen Knife", price:250, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-knife-1869758_960_720.jpg", desc:"Stainless steel kitchen knife."},
-{id:16, name:"Chopping Board", price:150, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chopping-board-1869759_960_720.jpg", desc:"Wooden chopping board."},
-{id:17, name:"Spice Rack", price:500, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/spice-rack-1869760_960_720.jpg", desc:"Wall-mounted spice rack."},
-{id:18, name:"Measuring Spoons", price:100, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-spoons-1869761_960_720.jpg", desc:"Set of stainless steel measuring spoons."},
-{id:19, name:"Mortar and Pestle", price:200, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mortar-and-pestle-1869762_960_720.jpg", desc:"Stone mortar and pestle."},
-{id:20, name:"Tea Infuser", price:80, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/tea-infuser-1869763_960_720.jpg", desc:"Stainless steel tea infuser."},
-{id:21, name:"Salt Shaker", price:60, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-shaker-1869764_960_720.jpg", desc:"Glass salt shaker."},
-{id:22, name:"Pepper Mill", price:150, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-mill-1869765_960_720.jpg", desc:"Wooden pepper mill."},
-{id:23, name:"Mixing Bowl", price:120, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mixing-bowl-1869766_960_720.jpg", desc:"Stainless steel mixing bowl."},
-{id:24, name:"Whisk", price:90, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/whisk-1869767_960_720.jpg", desc:"Stainless steel kitchen whisk."},
-{id:25, name:"Peeler", price:70, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/peeler-1869768_960_720.jpg", desc:"Vegetable peeler."},
-{id:26, name:"Grater", price:100, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/grater-1869769_960_720.jpg", desc:"Metal kitchen grater."},
-{id:27, name:"Measuring Cups", price:110, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-cups-1869770_960_720.jpg", desc:"Plastic measuring cup set."},
-{id:28, name:"Rolling Pin", price:130, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/rolling-pin-1869771_960_720.jpg", desc:"Wooden rolling pin."},
-{id:29, name:"Kitchen Scissors", price:140, img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-scissors-1869772_960_720.jpg", desc:"Stainless steel kitchen scissors."}
-]; // <-- close the products array
-
-// Initialize cart from localStorage
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 updateCartCount();
 
-// Render products on page
-function renderProducts(list) {
-  document.getElementById("product-list").innerHTML = list.map(p => `
+function renderProducts(list){
+  document.getElementById("product-list").innerHTML = list.map(p=>`
     <div class="product" onclick="openPopup(${p.id})">
       <img src="${p.img}">
       <h3>${p.name}</h3>
       <p>₹${p.price}</p>
       <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
-    </div>
-  `).join("");
+    </div>`).join("");
 }
-
 renderProducts(products);
 
-// Popup functions
-function openPopup(id) {
-  let p = products.find(x => x.id === id);
+function openPopup(id){
+  let p = products.find(x=>x.id===id);
   document.getElementById("popup-img").src = p.img;
   document.getElementById("popup-title").innerText = p.name;
   document.getElementById("popup-desc").innerText = p.desc;
   document.getElementById("popup").classList.add("active");
   localStorage.setItem("selectedProduct", JSON.stringify(p));
 }
+function closePopup(){ document.getElementById("popup").classList.remove("active"); }
+function addToCartFromPopup(){ let p=JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup(); }
 
-function closePopup(){
-  document.getElementById("popup").classList.remove("active");
-}
-
-function addToCartFromPopup(){
-  let p = JSON.parse(localStorage.getItem("selectedProduct"));
-  addToCart(p.id);
-  closePopup();
-}
-
-// Add to cart function
 function addToCart(id){
-  let p = products.find(x => x.id === id);
-  let item = cart.find(x => x.id === id);
-  if(item){
-    item.qty++;
-  } else {
-    cart.push({...p, qty:1});
-  }
-  localStorage.setItem("cart", JSON.stringify(cart));
+  let p=products.find(x=>x.id===id);
+  let item=cart.find(x=>x.id===id);
+  if(item){ item.qty++; } else { cart.push({...p,qty:1}); }
+  localStorage.setItem("cart",JSON.stringify(cart));
   updateCartCount();
+  renderCartItems();
   alert(`${p.name} added to cart`);
 }
 
-// Update cart count display
 function updateCartCount(){
-  document.getElementById("cart-count").innerText = cart.reduce((a,b) => a + b.qty, 0);
+  document.getElementById("cart-count").innerText=cart.reduce((a,b)=>a+b.qty,0);
 }
 
+// Cart sidebar functions
+document.querySelector('.cart-icon').addEventListener('click', openCart);
+function openCart(){ renderCartItems(); document.getElementById('cart-sidebar').style.right='0'; }
+function closeCart(){ document.getElementById('cart-sidebar').style.right='-400px'; }
+
+function renderCartItems(){
+  const container=document.getElementById('cart-items');
+  container.innerHTML='';
+  let total=0;
+  cart.forEach(item=>{
+    total+=item.price*item.qty;
+    container.innerHTML+=`
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+        <div><strong>${item.name}</strong><br>₹${item.price} x ${item.qty}</div>
+        <div>
+          <button onclick="changeQty(${item.id},-1)" style="padding:2px 6px;">-</button>
+          <button onclick="changeQty(${item.id},1)" style="padding:2px 6px;">+</button>
+          <button onclick="removeItem(${item.id})" style="padding:2px 6px; background:red; color:white;">X</button>
+        </div>
+      </div>`;
+  });
+  document.getElementById('cart-total').innerText=total;
+}
+
+function changeQty(id,delta){
+  let item=cart.find(x=>x.id===id);
+  if(item){ item.qty+=delta; if(item.qty<=0) removeItem(id); localStorage.setItem('cart',JSON.stringify(cart)); renderCartItems(); updateCartCount(); }
+}
+
+function removeItem(id){
+  cart=cart.filter(x=>x.id!==id);
+  localStorage.setItem('cart',JSON.stringify(cart));
+  renderCartItems();
+  updateCartCount();
+}
+
+function checkout(){ alert("Proceeding to checkout! Total: ₹"+cart.reduce((a,b)=>a+b.price*b.qty,0)); }
+
 // Search functionality
-document.getElementById("search").addEventListener("input", e => {
-  let term = e.target.value.toLowerCase();
-  renderProducts(products.filter(p => p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
+document.getElementById("search").addEventListener("input",e=>{
+  let term=e.target.value.toLowerCase();
+  renderProducts(products.filter(p=>p.name.toLowerCase().includes(term)||p.desc?.toLowerCase().includes(term)));
 });
-<!-- Articles / Blog Content -->
-<article style="padding:20px; max-width:800px; margin:auto;">
-  <h1>How to Make Chole Without Onion & Garlic – Using Yujanii Masala</h1>
-  <p>In Bihar, many families prefer cooking without onion and garlic, especially during festivals and fasting days. Don’t worry! With <strong>Yujanii Garam Masala</strong>, you can still enjoy delicious, aromatic <em>chole</em> full of flavor.</p>
-  
-  <h2>Ingredients</h2>
-  <ul>
-    <li>1 cup boiled chickpeas (chole)</li>
-    <li>2 tomatoes (pureed)</li>
-    <li>1 tsp ginger paste</li>
-    <li>2 tsp Yujanii Garam Masala</li>
-    <li>1 tsp cumin seeds</li>
-    <li>2 tbsp oil</li>
-    <li>Salt to taste</li>
-  </ul>
-  
-  <h2>Method</h2>
-  <ol>
-    <li>Heat oil in a pan and add cumin seeds.</li>
-    <li>Add tomato puree and cook until oil separates.</li>
-    <li>Add ginger paste and stir well.</li>
-    <li>Mix in <strong>Yujanii Garam Masala</strong> and salt.</li>
-    <li>Add boiled chickpeas, cook for 5–10 minutes, and garnish with coriander leaves.</li>
-  </ol>
-  
-  <h2>Why Use Yujanii Masala?</h2>
-  <p>Our garam masala is freshly ground, pure, and gives your <em>chole</em> the same depth of flavor you’d expect from a traditional North Indian kitchen – without needing onion or garlic.</p>
-  
-  <p><strong>👉 Order your Yujanii Garam Masala today and bring authentic taste to your meals!</strong></p>
-</article>
 
-<article style="padding:20px; max-width:800px; margin:auto;">
-  <h1>5 Spices Every Bihari Kitchen Needs</h1>
-  <p>Bihar’s food culture is rich and flavorful. From <em>litti-chokha</em> to <em>dal-puri</em>, spices play an important role. Here are the top 5 spices every Bihari kitchen must have – all available at <strong>Yujanii Store</strong>.</p>
-  
-  <h2>1. Garam Masala</h2>
-  <p>The soul of Indian curries. Our <strong>Yujanii Garam Masala</strong> is freshly ground for the best aroma.</p>
-  
-  <h2>2. Turmeric (Haldi)</h2>
-  <p>Used daily in dal and vegetables, turmeric also has powerful health benefits.</p>
-  
-  <h2>3. Cumin (Jeera)</h2>
-  <p>Essential for <em>tadka</em> in dals and subzis, adding earthy flavor.</p>
-  
-  <h2>4. Mustard Seeds (Sarson)</h2>
-  <p>Perfect for pickles, chutneys, and traditional Bihari cooking.</p>
-  
-  <h2>5. Red Chilli Powder (Lal Mirch)</h2>
-  <p>For that perfect spice kick, no kitchen is complete without it.</p>
-  
-  <h2>Final Thoughts</h2>
-  <p>With these 5 spices in your kitchen, you can cook almost any traditional Bihari dish. Yujanii Store brings you <strong>pure, high-quality masalas</strong> delivered to your doorstep.</p>
-  
-  <p><strong>👉 Explore our masala collection today and upgrade your kitchen!</strong></p>
-</article>
+// Hero carousel autoplay
+let currentSlide=0;
+const slides=document.querySelectorAll('.hero-carousel img');
+setInterval(()=>{
+  slides[currentSlide].classList.remove('active');
+  currentSlide=(currentSlide+1)%slides.length;
+  slides[currentSlide].classList.add('active');
+},4000);
+</script>
 
-<!-- Footer Start -->
-<footer style="background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif;">
-  <div style="max-width:1000px; margin:auto;">
-    <p>&copy; 2025 Yujanii Store. All rights reserved.</p>
-    <p>
-      <a href="/privacy.html" style="color:#1a73e8; text-decoration:none; margin:0 10px;">Privacy Policy</a> |
-      <a href="/terms.html" style="color:#1a73e8; text-decoration:none; margin:0 10px;">Terms & Conditions</a> |
-      <a href="/contact.html" style="color:#1a73e8; text-decoration:none; margin:0 10px;">Contact Us</a>
-    </p>
-    <p>
-      Follow us:
-      <a href="https://instagram.com" style="color:#1a73e8; text-decoration:none; margin:0 5px;">Instagram</a> |
-      <a href="https://facebook.com" style="color:#1a73e8; text-decoration:none; margin:0 5px;">Facebook</a>
-    </p>
-  </div>
-</footer>
-<!-- Footer End -->
-
+</body>
+</html>
