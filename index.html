@@ -2,64 +2,66 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
 <meta name="description" content="Buy premium spices and kitchen tools online. Fast delivery in Bihar.">
+<meta name="keywords" content="masala online Bihar, spices Patna, kitchen accessories Bihar, Yujanii store, buy masala online India">
+<meta name="robots" content="index, follow">
 
 <style>
   body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-  header { background: #ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; position:sticky; top:0; z-index:999; }
+  header { background:#ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; position:sticky; top:0; z-index:100; }
   header h1 { margin:0; font-size:24px; cursor:pointer; }
+  nav a { color:white; text-decoration:none; margin:0 10px; }
   .search-box input { padding:8px; border:none; border-radius:6px; width:200px; }
-  .cart-icon { cursor:pointer; font-size:20px; position:relative; }
-  .cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
-
-  /* Hero carousel */
-  .hero-carousel { position:relative; overflow:hidden; max-height:300px; margin-top:10px; }
-  .hero-carousel img { width:100%; display:none; border-radius:8px; }
-  .hero-carousel img.active { display:block; }
-
-  /* Product grid */
   .products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
   .product { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; cursor:pointer; transition: transform 0.2s; }
-  .product:hover { transform: scale(1.03); }
+  .product:hover { transform:scale(1.03); }
   .product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
   .btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-
   /* Popup */
-  .popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
+  .popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; z-index:200; }
   .popup.active { visibility:visible; opacity:1; }
   .popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
   .popup-content img { width:100%; border-radius:8px; }
   .popup-content h2 { margin:10px 0; }
   .popup-content p { font-size:14px; color:#555; }
   .close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; float:right; cursor:pointer; }
-
-  /* Slide-in Cart */
-  #cart-sidebar { position:fixed; top:0; right:-400px; width:350px; height:100%; background:#fff; box-shadow:-2px 0 10px rgba(0,0,0,0.2); transition:right 0.3s; z-index:1000; padding:20px; overflow-y:auto; }
-  #cart-sidebar h2 { margin-top:0; }
-
-  /* Footer */
-  footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial,sans-serif; margin-top:20px; }
+  /* Cart Sidebar */
+  #cart-sidebar { position:fixed; top:0; right:-400px; width:400px; height:100%; background:#fff; box-shadow:-2px 0 5px rgba(0,0,0,0.2); padding:20px; overflow-y:auto; transition:0.3s; z-index:150; }
+  #cart-sidebar button { margin-top:10px; }
+  /* Hero carousel */
+  .hero-carousel { position:relative; overflow:hidden; height:250px; margin:10px 20px; border-radius:12px; }
+  .hero-carousel img { width:100%; height:250px; object-fit:cover; position:absolute; top:0; left:0; opacity:0; transition:opacity 1s; border-radius:12px; }
+  .hero-carousel img.active { opacity:1; }
+  footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial,sans-serif; }
   footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
 </style>
 </head>
 <body>
 
+<!-- Header -->
 <header>
-  <h1 onclick="window.location='/index.html'">🛒 Yujanii Store</h1>
+  <h1 onclick="window.location='index.html'">🛒 Yujanii Store</h1>
+  <nav>
+    <a href="/index.html">Home</a>
+    <a href="/products.html">Products</a>
+    <a href="/contact.html">Contact</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/privacy.html">Privacy</a>
+  </nav>
   <div class="search-box"><input type="text" id="search" placeholder="Search products..."></div>
-  <div class="cart-icon">🛒<span class="cart-count" id="cart-count">0</span></div>
+  <div class="cart-icon" onclick="openCart()">🛒<span class="cart-count" id="cart-count">0</span></div>
 </header>
 
 <!-- Hero Carousel -->
 <section class="hero-carousel">
-  <img src="banner1.jpg" alt="Fresh Masalas" class="active">
-  <img src="banner2.jpg" alt="Kitchen Accessories">
+  <img src="https://cdn.pixabay.com/photo/2016/11/29/03/52/garam-masala-1869757_960_720.jpg" alt="Fresh Masalas" class="active">
+  <img src="https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-knife-1869758_960_720.jpg" alt="Kitchen Accessories">
 </section>
 
 <!-- Product Grid -->
-<section class="products" id="product-list"></section>
+<div class="products" id="product-list"></div>
 
 <!-- Product Popup -->
 <div class="popup" id="popup">
@@ -72,37 +74,30 @@
   </div>
 </div>
 
-<!-- Slide-In Cart Sidebar -->
+<!-- Cart Sidebar -->
 <div id="cart-sidebar">
-  <button onclick="closeCart()" style="float:right; background:red; color:white; border:none; padding:5px 10px; border-radius:5px; cursor:pointer;">X</button>
-  <h2>🛒 Your Cart</h2>
-  <div id="cart-items"></div>
-  <h3>Total: ₹<span id="cart-total">0</span></h3>
-  <button onclick="checkout()" style="width:100%; padding:10px; background:#ff6f00; color:white; border:none; border-radius:5px; cursor:pointer;">Checkout</button>
-</div>
-  <!-- Cart Sidebar -->
-<div id="cart-sidebar" style="position:fixed; top:0; right:-400px; width:400px; height:100%; background:#fff; box-shadow:-2px 0 5px rgba(0,0,0,0.2); padding:20px; overflow-y:auto; transition:0.3s;">
-  <button onclick="closeCart()" style="float:right; background:red; color:#fff; padding:5px 10px; border:none; border-radius:4px;">X</button>
+  <button onclick="closeCart()" style="float:right; background:red; color:white; padding:5px 10px; border:none; border-radius:4px;">X</button>
   <h2>Your Cart</h2>
   <div id="cart-items"></div>
   <p>Total: ₹<span id="cart-total">0</span></p>
 
+  <!-- Checkout Form -->
   <form action="https://formspree.io/f/mnngdzvl" method="POST">
     <input type="hidden" name="_redirect" value="https://yujanii.vercel.app/thankyou.html">
     <input type="hidden" name="cart" id="cart-data">
-    <button type="submit" style="padding:10px 20px; background:#ff6f00; color:white; border:none; border-radius:6px;">Checkout</button>
+    <button type="submit" class="btn">Checkout</button>
   </form>
 </div>
-function updateCartDataField(){
-  document.getElementById('cart-data').value = JSON.stringify(cart);
-}
 
-// Call this whenever cart changes
-function updateCartCount(){
-  document.getElementById("cart-count").innerText = cart.reduce((a,b)=>a+b.qty,0);
-  updateCartDataField(); // <-- ensure form gets updated
-}
-
+<!-- Newsletter -->
+<section style="background:#f9f9f9; padding:20px; text-align:center;">
+  <h2>Subscribe to our newsletter</h2>
+  <form action="https://formspree.io/f/mnngdzvl" method="POST">
+    <input type="email" name="email" placeholder="Enter your email" required style="padding:10px; width:250px;">
+    <input type="hidden" name="_redirect" value="https://yujanii.vercel.app/thankyou.html">
+    <button type="submit" class="btn">Subscribe</button>
+  </form>
+</section>
 
 <!-- Footer -->
 <footer>
@@ -119,42 +114,44 @@ function updateCartCount(){
   </p>
 </footer>
 
+<!-- Scripts -->
 <script>
 const products = [
-  {id:1,name:"Turmeric",price:50,img:"images/turmeric-root-and-powder.jpg"},
-  {id:2,name:"Jeera",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/jeera-1869745_960_720.jpg",desc:"Premium cumin seeds from Rajasthan."},
-  {id:3,name:"Cinnamon",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cinnamon-1869746_960_720.jpg",desc:"Organic cinnamon sticks from Kerala."},
-  {id:4,name:"Cloves",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cloves-1869747_960_720.jpg",desc:"Fresh cloves harvested from Kerala."},
-  {id:5,name:"Cardamom",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cardamom-1869748_960_720.jpg",desc:"Green cardamom pods from Sikkim."},
-  {id:6,name:"Mustard Seeds",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mustard-seeds-1869749_960_720.jpg",desc:"Yellow mustard seeds from Bihar."},
-  {id:7,name:"Coriander Seeds",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/coriander-seeds-1869750_960_720.jpg",desc:"Coriander seeds from Madhya Pradesh."},
-  {id:8,name:"Fennel Seeds",price:55,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fennel-seeds-1869751_960_720.jpg",desc:"Fennel seeds from Gujarat."},
-  {id:9,name:"Fenugreek Seeds",price:50,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fenugreek-seeds-1869752_960_720.jpg",desc:"Fenugreek seeds from Rajasthan."},
-  {id:10,name:"Saffron",price:1500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/saffron-1869753_960_720.jpg",desc:"Premium saffron from Kashmir."},
-  {id:11,name:"Salt",price:30,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-1869754_960_720.jpg",desc:"Himalayan pink salt."},
-  {id:12,name:"Pepper",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-1869755_960_720.jpg",desc:"Black pepper from Kerala."},
-  {id:13,name:"Chili Powder",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chili-powder-1869756_960_720.jpg",desc:"Red chili powder from Andhra Pradesh."},
-  {id:14,name:"Garam Masala",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/garam-masala-1869757_960_720.jpg",desc:"Homemade garam masala blend."},
-  {id:15,name:"Kitchen Knife",price:250,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-knife-1869758_960_720.jpg",desc:"Stainless steel kitchen knife."},
-  {id:16,name:"Chopping Board",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chopping-board-1869759_960_720.jpg",desc:"Wooden chopping board."},
-  {id:17,name:"Spice Rack",price:500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/spice-rack-1869760_960_720.jpg",desc:"Wall-mounted spice rack."},
-  {id:18,name:"Measuring Spoons",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-spoons-1869761_960_720.jpg",desc:"Set of stainless steel measuring spoons."},
-  {id:19,name:"Mortar and Pestle",price:200,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mortar-and-pestle-1869762_960_720.jpg",desc:"Stone mortar and pestle."},
-  {id:20,name:"Tea Infuser",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/tea-infuser-1869763_960_720.jpg",desc:"Stainless steel tea infuser."},
-  {id:21,name:"Salt Shaker",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-shaker-1869764_960_720.jpg",desc:"Glass salt shaker."},
-  {id:22,name:"Pepper Mill",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-mill-1869765_960_720.jpg",desc:"Wooden pepper mill."},
-  {id:23,name:"Mixing Bowl",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mixing-bowl-1869766_960_720.jpg",desc:"Stainless steel mixing bowl."},
-  {id:24,name:"Whisk",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/whisk-1869767_960_720.jpg",desc:"Stainless steel kitchen whisk."},
-  {id:25,name:"Peeler",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/peeler-1869768_960_720.jpg",desc:"Vegetable peeler."},
-  {id:26,name:"Grater",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/grater-1869769_960_720.jpg",desc:"Metal kitchen grater."},
-  {id:27,name:"Measuring Cups",price:110,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-cups-1869770_960_720.jpg",desc:"Plastic measuring cup set."},
-  {id:28,name:"Rolling Pin",price:130,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/rolling-pin-1869771_960_720.jpg",desc:"Wooden rolling pin."},
-  {id:29,name:"Kitchen Scissors",price:140,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-scissors-1869772_960_720.jpg",desc:"Stainless steel kitchen scissors."}
+{id:1,name:"Turmeric",price:50,img:"images/turmeric-root-and-powder.jpg",desc:"Premium turmeric roots."},
+{id:2,name:"Jeera",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/jeera-1869745_960_720.jpg",desc:"Premium cumin seeds from Rajasthan."},
+{id:3,name:"Cinnamon",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cinnamon-1869746_960_720.jpg",desc:"Organic cinnamon sticks from Kerala."},
+{id:4,name:"Cloves",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cloves-1869747_960_720.jpg",desc:"Fresh cloves harvested from Kerala."},
+{id:5,name:"Cardamom",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/cardamom-1869748_960_720.jpg",desc:"Green cardamom pods from Sikkim."},
+{id:6,name:"Mustard Seeds",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mustard-seeds-1869749_960_720.jpg",desc:"Yellow mustard seeds from Bihar."},
+{id:7,name:"Coriander Seeds",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/coriander-seeds-1869750_960_720.jpg",desc:"Coriander seeds from Madhya Pradesh."},
+{id:8,name:"Fennel Seeds",price:55,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fennel-seeds-1869751_960_720.jpg",desc:"Fennel seeds from Gujarat."},
+{id:9,name:"Fenugreek Seeds",price:50,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/fenugreek-seeds-1869752_960_720.jpg",desc:"Fenugreek seeds from Rajasthan."},
+{id:10,name:"Saffron",price:1500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/saffron-1869753_960_720.jpg",desc:"Premium saffron from Kashmir."},
+{id:11,name:"Salt",price:30,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-1869754_960_720.jpg",desc:"Himalayan pink salt."},
+{id:12,name:"Pepper",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-1869755_960_720.jpg",desc:"Black pepper from Kerala."},
+{id:13,name:"Chili Powder",price:40,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chili-powder-1869756_960_720.jpg",desc:"Red chili powder from Andhra Pradesh."},
+{id:14,name:"Garam Masala",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/garam-masala-1869757_960_720.jpg",desc:"Homemade garam masala blend."},
+{id:15,name:"Kitchen Knife",price:250,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-knife-1869758_960_720.jpg",desc:"Stainless steel kitchen knife."},
+{id:16,name:"Chopping Board",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/chopping-board-1869759_960_720.jpg",desc:"Wooden chopping board."},
+{id:17,name:"Spice Rack",price:500,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/spice-rack-1869760_960_720.jpg",desc:"Wall-mounted spice rack."},
+{id:18,name:"Measuring Spoons",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-spoons-1869761_960_720.jpg",desc:"Set of stainless steel measuring spoons."},
+{id:19,name:"Mortar and Pestle",price:200,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mortar-and-pestle-1869762_960_720.jpg",desc:"Stone mortar and pestle."},
+{id:20,name:"Tea Infuser",price:80,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/tea-infuser-1869763_960_720.jpg",desc:"Stainless steel tea infuser."},
+{id:21,name:"Salt Shaker",price:60,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/salt-shaker-1869764_960_720.jpg",desc:"Glass salt shaker."},
+{id:22,name:"Pepper Mill",price:150,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/pepper-mill-1869765_960_720.jpg",desc:"Wooden pepper mill."},
+{id:23,name:"Mixing Bowl",price:120,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/mixing-bowl-1869766_960_720.jpg",desc:"Stainless steel mixing bowl."},
+{id:24,name:"Whisk",price:90,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/whisk-1869767_960_720.jpg",desc:"Stainless steel kitchen whisk."},
+{id:25,name:"Peeler",price:70,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/peeler-1869768_960_720.jpg",desc:"Vegetable peeler."},
+{id:26,name:"Grater",price:100,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/grater-1869769_960_720.jpg",desc:"Metal kitchen grater."},
+{id:27,name:"Measuring Cups",price:110,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/measuring-cups-1869770_960_720.jpg",desc:"Plastic measuring cup set."},
+{id:28,name:"Rolling Pin",price:130,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/rolling-pin-1869771_960_720.jpg",desc:"Wooden rolling pin."},
+{id:29,name:"Kitchen Scissors",price:140,img:"https://cdn.pixabay.com/photo/2016/11/29/03/52/kitchen-scissors-1869772_960_720.jpg",desc:"Stainless steel kitchen scissors."}
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 updateCartCount();
 
+// Render products
 function renderProducts(list){
   document.getElementById("product-list").innerHTML = list.map(p=>`
     <div class="product" onclick="openPopup(${p.id})">
@@ -166,6 +163,7 @@ function renderProducts(list){
 }
 renderProducts(products);
 
+// Product popup
 function openPopup(id){
   let p = products.find(x=>x.id===id);
   document.getElementById("popup-img").src = p.img;
@@ -175,73 +173,66 @@ function openPopup(id){
   localStorage.setItem("selectedProduct", JSON.stringify(p));
 }
 function closePopup(){ document.getElementById("popup").classList.remove("active"); }
-function addToCartFromPopup(){ let p=JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup(); }
+function addToCartFromPopup(){ 
+  let p = JSON.parse(localStorage.getItem("selectedProduct")); 
+  addToCart(p.id); 
+  closePopup();
+}
 
+// Cart functions
 function addToCart(id){
-  let p=products.find(x=>x.id===id);
-  let item=cart.find(x=>x.id===id);
-  if(item){ item.qty++; } else { cart.push({...p,qty:1}); }
-  localStorage.setItem("cart",JSON.stringify(cart));
+  let p = products.find(x=>x.id===id);
+  let item = cart.find(x=>x.id===id);
+  if(item){ item.qty++; } else { cart.push({...p, qty:1}); }
+  localStorage.setItem("cart", JSON.stringify(cart));
   updateCartCount();
-  renderCartItems();
-  alert(`${p.name} added to cart`);
 }
 
 function updateCartCount(){
-  document.getElementById("cart-count").innerText=cart.reduce((a,b)=>a+b.qty,0);
+  document.getElementById("cart-count").innerText = cart.reduce((a,b)=>a+b.qty,0);
+  updateCartDataField();
 }
 
-// Cart sidebar functions
-document.querySelector('.cart-icon').addEventListener('click', openCart);
-function openCart(){ renderCartItems(); document.getElementById('cart-sidebar').style.right='0'; }
-function closeCart(){ document.getElementById('cart-sidebar').style.right='-400px'; }
+function updateCartDataField(){
+  document.getElementById('cart-data').value = JSON.stringify(cart);
+}
+
+// Cart sidebar
+function openCart(){
+  let sidebar = document.getElementById("cart-sidebar");
+  sidebar.style.right="0";
+  renderCartItems();
+}
+function closeCart(){
+  document.getElementById("cart-sidebar").style.right="-400px";
+}
 
 function renderCartItems(){
-  const container=document.getElementById('cart-items');
-  container.innerHTML='';
-  let total=0;
-  cart.forEach(item=>{
-    total+=item.price*item.qty;
-    container.innerHTML+=`
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <div><strong>${item.name}</strong><br>₹${item.price} x ${item.qty}</div>
-        <div>
-          <button onclick="changeQty(${item.id},-1)" style="padding:2px 6px;">-</button>
-          <button onclick="changeQty(${item.id},1)" style="padding:2px 6px;">+</button>
-          <button onclick="removeItem(${item.id})" style="padding:2px 6px; background:red; color:white;">X</button>
-        </div>
-      </div>`;
-  });
-  document.getElementById('cart-total').innerText=total;
+  let html = cart.map(item=>`
+    <div style="display:flex; justify-content:space-between; margin-bottom:10px;">
+      <div>
+        ${item.name} x ${item.qty}
+      </div>
+      <div>₹${item.price * item.qty}</div>
+    </div>`).join("");
+  document.getElementById("cart-items").innerHTML = html;
+  let total = cart.reduce((a,b)=>a+b.price*b.qty,0);
+  document.getElementById("cart-total").innerText = total;
 }
 
-function changeQty(id,delta){
-  let item=cart.find(x=>x.id===id);
-  if(item){ item.qty+=delta; if(item.qty<=0) removeItem(id); localStorage.setItem('cart',JSON.stringify(cart)); renderCartItems(); updateCartCount(); }
-}
-
-function removeItem(id){
-  cart=cart.filter(x=>x.id!==id);
-  localStorage.setItem('cart',JSON.stringify(cart));
-  renderCartItems();
-  updateCartCount();
-}
-
-function checkout(){ alert("Proceeding to checkout! Total: ₹"+cart.reduce((a,b)=>a+b.price*b.qty,0)); }
-
-// Search functionality
-document.getElementById("search").addEventListener("input",e=>{
-  let term=e.target.value.toLowerCase();
-  renderProducts(products.filter(p=>p.name.toLowerCase().includes(term)||p.desc?.toLowerCase().includes(term)));
+// Search
+document.getElementById("search").addEventListener("input", e=>{
+  let term = e.target.value.toLowerCase();
+  renderProducts(products.filter(p=>p.name.toLowerCase().includes(term) || p.desc.toLowerCase().includes(term)));
 });
 
-// Hero carousel autoplay
-let currentSlide=0;
-const slides=document.querySelectorAll('.hero-carousel img');
+// Hero carousel
+let heroIndex=0;
+const slides=document.querySelectorAll(".hero-carousel img");
 setInterval(()=>{
-  slides[currentSlide].classList.remove('active');
-  currentSlide=(currentSlide+1)%slides.length;
-  slides[currentSlide].classList.add('active');
+  slides.forEach(s=>s.classList.remove("active"));
+  heroIndex=(heroIndex+1)%slides.length;
+  slides[heroIndex].classList.add("active");
 },4000);
 </script>
 
