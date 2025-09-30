@@ -197,7 +197,50 @@ function showSlide(){
     heroIndex=(heroIndex+1)%slides.length;
 } 
 setInterval(showSlide,4000);
+    const cartSidebar = document.getElementById("cart-sidebar");
+
+document.querySelector(".cart-icon").addEventListener("click", () => {
+    renderCartSidebar();
+    cartSidebar.classList.add("active");
+});
+
+function closeCart() {
+    cartSidebar.classList.remove("active");
+}
+
+function renderCartSidebar() {
+    const cartItemsDiv = document.getElementById("cart-items");
+    cartItemsDiv.innerHTML = "";
+    let total = 0;
+    if(cart.length === 0){
+        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
+    } else {
+        cart.forEach(item => {
+            total += item.price * item.qty;
+            cartItemsDiv.innerHTML += `
+            <div style="margin-bottom:15px;">
+                <strong>${item.name}</strong><br>
+                ₹${item.price} x ${item.qty} 
+                <button onclick="removeFromCart(${item.id})" style="margin-left:5px;">❌</button>
+            </div>`;
+        });
+    }
+    document.getElementById("cart-total").innerText = total;
+}
+
+function removeFromCart(id){
+    cart = cart.filter(item => item.id !== id);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updateCartCount();
+    renderCartSidebar();
+}
+
+function checkout() {
+    window.location.href = "checkout.html";
+}
+
 </script>
+    
     <div id="cart-sidebar" style="position:fixed; top:0; right:-350px; width:350px; height:100%; background:#fff; box-shadow:-3px 0 8px rgba(0,0,0,0.2); transition:0.3s; z-index:10000; padding:20px; overflow-y:auto;">
     <h2>🛒 Your Cart</h2>
     <button style="float:right; cursor:pointer;" onclick="closeCart()">X</button>
@@ -208,7 +251,9 @@ setInterval(showSlide,4000);
 </div>
 
 
+
 </body>
 </html>
+
 
 
