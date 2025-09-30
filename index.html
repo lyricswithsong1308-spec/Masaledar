@@ -28,11 +28,19 @@ header h1 { margin: 0; }
 .close-btn { background: red; color: white; border: none; padding: 6px 12px; border-radius: 5px; float: right; cursor: pointer; }
 footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif; }
 footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
+.search-box input { padding: 6px 10px; border-radius: 6px; border: none; width: 180px; }
+.cart-icon { cursor: pointer; font-size: 20px; position: relative; margin-left: 10px; }
+.cart-count { position: absolute; top: -8px; right: -8px; background: white; color: #ff6f00; font-size: 12px; border-radius: 50%; padding: 2px 6px; font-weight: bold; }
 </style>
 </head>
 <body>
+
 <header>
 <h1>🛒 Yujanii Store</h1>
+<div>
+<input type="text" id="search" placeholder="Search products..." class="search-box">
+<span class="cart-icon" onclick="window.location.href='checkout.html'">🛒<span class="cart-count" id="cart-count">0</span></span>
+</div>
 <nav class="navbar">
 <a href="index.html">Home</a>
 <a href="products.html">Products</a>
