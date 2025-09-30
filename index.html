@@ -101,10 +101,8 @@ footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
 </nav>
 </header>
 
-<div class="hero-carousel">
-  <img src="images/banner1.jpg" class="active" alt="Fresh Masalas">
-  <img src="images/banner2.jpg" alt="Kitchen Accessories">
-</div>
+
+    
 
 <div class="products" id="product-list"></div>
 
@@ -183,7 +181,7 @@ updateCartCount();
 function renderProducts(list) {
     document.getElementById("product-list").innerHTML = list.map(p=>`
     <div class="product" onclick="openPopup(${p.id})">
-        <img src="${p.img}">
+        
         <h3>${p.name}</h3>
         <p>₹${p.price}</p>
         <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
@@ -318,7 +316,8 @@ function renderBlogs() {
     const blogContainer = document.querySelector(".blog-container");
     blogContainer.innerHTML = blogs.map(blog => `
         <div class="blog-post" onclick="openBlog(${blog.id})">
-            <img src="${blog.img}" alt="${blog.title}">
+
+          
             <h3>${blog.title}</h3>
             <p>${blog.content.substring(0,80)}...</p>
         </div>
@@ -338,4 +337,5 @@ function closeBlogPopup(){ document.getElementById("blog-popup").classList.remov
 </script>
 </body>
 </html>
+
 
