@@ -8,52 +8,52 @@
 <meta name="keywords" content="masala online Bihar, spices Patna, kitchen accessories Bihar, Yujanii store, buy masala online India">
 
 <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-    header { background:#ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; flex-wrap:wrap; }
-    header h1 { margin:0; }
-    .navbar a { color:white; margin:0 10px; text-decoration:none; }
-    .hero-carousel { position:relative; max-width:100%; overflow:hidden; }
-    .hero-carousel img { width:100%; display:none; }
-    .hero-carousel img.active { display:block; }
-    .products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
-    .product { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; cursor:pointer; transition:transform 0.2s; }
-    .product:hover { transform:scale(1.03); }
-    .product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
-    .btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-    .popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
-    .popup.active { visibility:visible; opacity:1; }
-    .popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-    .popup-content img { width:100%; border-radius:8px; }
-    .popup-content h2 { margin:10px 0; }
-    .close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; float:right; cursor:pointer; }
-    footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif; }
-    footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
-    .search-box { position:relative; }
-    .search-box input { padding:6px 10px; border-radius:6px; border:none; width:180px; }
-    #search-suggestions { position:absolute; top:35px; left:0; background:white; border:1px solid #ccc; max-height:200px; overflow-y:auto; width:180px; display:none; z-index:1000; }
-    .suggestion-item { padding:5px; cursor:pointer; }
-    .suggestion-item:hover { background:#f0f0f0; }
-    .cart-icon { cursor:pointer; font-size:20px; position:relative; margin-left:10px; }
-    .cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
+body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
+header { background:#ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; flex-wrap:wrap; }
+header h1 { margin:0; }
+.navbar a { color:white; margin:0 10px; text-decoration:none; }
+.hero-carousel { position:relative; max-width:100%; overflow:hidden; }
+.hero-carousel img { width:100%; display:none; }
+.hero-carousel img.active { display:block; }
+.products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
+.product { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; cursor:pointer; transition:transform 0.2s; }
+.product:hover { transform:scale(1.03); }
+.product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
+.btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+.popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
+.popup.active { visibility:visible; opacity:1; }
+.popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
+.popup-content img { width:100%; border-radius:8px; }
+.popup-content h2 { margin:10px 0; }
+.close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; float:right; cursor:pointer; }
+footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif; }
+footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
+.search-box { position:relative; }
+.search-box input { padding:6px 10px; border-radius:6px; border:none; width:180px; }
+#search-suggestions { position:absolute; top:35px; left:0; background:white; border:1px solid #ccc; max-height:200px; overflow-y:auto; width:180px; display:none; z-index:1000; }
+.suggestion-item { padding:5px; cursor:pointer; }
+.suggestion-item:hover { background:#f0f0f0; }
+.cart-icon { cursor:pointer; font-size:20px; position:relative; margin-left:10px; }
+.cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
 
-<style>
 /* Cart Sidebar */
 #cart-sidebar { 
     position: fixed; 
     top: 0; 
-    right: -350px; /* hidden by default */
+    right: -350px; 
     width: 350px; 
     height: 100%; 
     background: #fff; 
     box-shadow: -3px 0 8px rgba(0,0,0,0.2); 
-    transition: right 0.4s ease; /* smooth slide */
+    transition: right 0.4s ease; 
     z-index: 10000; 
     padding: 20px; 
     overflow-y: auto; 
 }
-#cart-sidebar.active { 
-    right: 0; 
-}
+#cart-sidebar.active { right: 0; }
+#cart-sidebar h2 { margin-top:0; }
+.cart-item { margin-bottom:15px; }
+.cart-item button { margin-left:5px; cursor:pointer; }
 
 /* Overlay */
 #cart-overlay {
@@ -73,41 +73,6 @@
     visibility: visible;
     background: rgba(0,0,0,0.5);
 }
-</style>
-
-<script>
-// Cart Icon Click
-document.querySelector(".cart-icon").addEventListener("click", () => {
-    renderCartSidebar();
-    cartSidebar.classList.add("active");
-    document.getElementById("cart-overlay").classList.add("active");
-});
-
-// Close Cart
-function closeCart(){
-    cartSidebar.classList.remove("active");
-    document.getElementById("cart-overlay").classList.remove("active");
-}
-</script>
-
-
-    /* Overlay */
-    #cart-overlay {
-        position: fixed;
-        top:0;
-        left:0;
-        width:100%;
-        height:100%;
-        background: rgba(0,0,0,0.5);
-        opacity: 0;
-        visibility: hidden;
-        transition: 0.3s;
-        z-index: 9999;
-    }
-    #cart-overlay.active {
-        opacity: 1;
-        visibility: visible;
-    }
 </style>
 </head>
 <body>
@@ -145,7 +110,7 @@ function closeCart(){
 </div>
 </div>
 
-<!-- Overlay -->
+<!-- Cart Overlay -->
 <div id="cart-overlay" onclick="closeCart()"></div>
 
 <!-- Cart Sidebar -->
@@ -191,8 +156,8 @@ const products = [
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 updateCartCount();
 
-// Render Products
-function renderProducts(list){
+// Render products
+function renderProducts(list) {
     document.getElementById("product-list").innerHTML = list.map(p=>`
     <div class="product" onclick="openPopup(${p.id})">
         <img src="${p.img}">
@@ -205,28 +170,27 @@ renderProducts(products);
 
 // Popup
 function openPopup(id){
-    let p = products.find(x=>x.id===id);
-    document.getElementById("popup-img").src = p.img;
-    document.getElementById("popup-title").innerText = p.name;
-    document.getElementById("popup-desc").innerText = p.desc || "";
+    let p=products.find(x=>x.id===id);
+    document.getElementById("popup-img").src=p.img;
+    document.getElementById("popup-title").innerText=p.name;
+    document.getElementById("popup-desc").innerText=p.desc || "";
     document.getElementById("popup").classList.add("active");
     localStorage.setItem("selectedProduct", JSON.stringify(p));
 }
-function closePopup(){ document.getElementById("popup").classList.remove("active"); }
-function addToCartFromPopup(){ let p=JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup(); }
+function closePopup(){document.getElementById("popup").classList.remove("active");}
+function addToCartFromPopup(){let p=JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup();}
 
 // Cart Functions
 function addToCart(id){
-    let p = products.find(x=>x.id===id);
-    let item = cart.find(x=>x.id===id);
-    if(item){ item.qty++; } else { cart.push({...p, qty:1}); }
+    let p=products.find(x=>x.id===id);
+    let item=cart.find(x=>x.id===id);
+    if(item){item.qty++;} else {cart.push({...p,qty:1});}
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     renderCartSidebar();
 }
-
 function updateCartCount(){
-    document.getElementById("cart-count").innerText = cart.reduce((a,b)=>a+b.qty,0);
+    document.getElementById("cart-count").innerText=cart.reduce((a,b)=>a+b.qty,0);
 }
 
 // Cart Sidebar
@@ -236,20 +200,18 @@ document.querySelector(".cart-icon").addEventListener("click", () => {
     cartSidebar.classList.add("active");
     document.getElementById("cart-overlay").classList.add("active");
 });
-
-function closeCart(){
-    cartSidebar.classList.remove("active");
+function closeCart(){ 
+    cartSidebar.classList.remove("active"); 
     document.getElementById("cart-overlay").classList.remove("active");
 }
-
-function renderCartSidebar(){
+function renderCartSidebar() {
     const cartItemsDiv = document.getElementById("cart-items");
     cartItemsDiv.innerHTML = "";
     let total = 0;
     if(cart.length === 0){
         cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
     } else {
-        cart.forEach(item=>{
+        cart.forEach(item => {
             total += item.price * item.qty;
             cartItemsDiv.innerHTML += `
             <div class="cart-item">
@@ -264,72 +226,62 @@ function renderCartSidebar(){
     }
     document.getElementById("cart-total").innerText = total;
 }
-
 function removeFromCart(id){
-    cart = cart.filter(item=>item.id!==id);
+    cart = cart.filter(item => item.id !== id);
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     renderCartSidebar();
 }
-
 function increaseQty(id){
     let item = cart.find(x=>x.id===id);
-    if(item) item.qty++;
+    if(item){ item.qty++; }
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     renderCartSidebar();
 }
-
 function decreaseQty(id){
     let item = cart.find(x=>x.id===id);
-    if(item && item.qty>1) item.qty--;
+    if(item && item.qty>1){ item.qty--; }
     else if(item && item.qty===1){ removeFromCart(id); return; }
     localStorage.setItem("cart", JSON.stringify(cart));
     updateCartCount();
     renderCartSidebar();
 }
-
 function checkout(){ window.location.href="checkout.html"; }
 
 // Search Suggestions
 const searchInput = document.getElementById("search");
 const suggestionsBox = document.getElementById("search-suggestions");
 
-searchInput.addEventListener("input", e=>{
+searchInput.addEventListener("input", e => {
     let term = e.target.value.toLowerCase();
-    if(term===""){ suggestionsBox.style.display="none"; renderProducts(products); return; }
+    if(term === "") { suggestionsBox.style.display="none"; renderProducts(products); return; }
     let matches = products.filter(p => p.name.toLowerCase().includes(term) || (p.desc && p.desc.toLowerCase().includes(term)));
     renderProducts(matches);
-    suggestionsBox.innerHTML = matches.map(p=>`<div class="suggestion-item" onclick="selectSuggestion('${p.name}')">${p.name}</div>`).join("");
+    suggestionsBox.innerHTML = matches.map(p => `<div class="suggestion-item" onclick="selectSuggestion('${p.name}')">${p.name}</div>`).join("");
     suggestionsBox.style.display = matches.length ? "block" : "none";
 });
-
-function selectSuggestion(name){
-    searchInput.value=name;
+function selectSuggestion(name) {
+    searchInput.value = name;
     suggestionsBox.style.display="none";
-    let filtered = products.filter(p=>p.name===name);
+    let filtered = products.filter(p => p.name === name);
     renderProducts(filtered);
 }
-
-document.addEventListener("click", e=>{
+document.addEventListener("click", e => {
     if(!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)){
         suggestionsBox.style.display="none";
     }
 });
 
-// Hero Carousel
-let heroIndex=0;
-const slides=document.querySelectorAll('.hero-carousel img');
+// Hero carousel
+let heroIndex=0; 
+const slides=document.querySelectorAll('.hero-carousel img'); 
 function showSlide(){
-    slides.forEach(s=>s.classList.remove('active'));
-    slides[heroIndex].classList.add('active');
+    slides.forEach(s=>s.classList.remove('active')); 
+    slides[heroIndex].classList.add('active'); 
     heroIndex=(heroIndex+1)%slides.length;
-}
+} 
 setInterval(showSlide,4000);
-
 </script>
-
 </body>
 </html>
-
-
