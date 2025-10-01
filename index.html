@@ -1,6 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">c
 <head>
+    <link rel="manifest" href="/manifest.json">
+<meta name="theme-color" content="#FF5722">
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('/service-worker.js')
+      .then(function(registration) {
+        console.log('ServiceWorker registered:', registration.scope);
+      })
+      .catch(function(error) {
+        console.log('ServiceWorker registration failed:', error);
+      });
+  });
+}
+</script>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
@@ -338,5 +355,6 @@ function closeBlogPopup(){ document.getElementById("blog-popup").classList.remov
 </script>
 </body>
 </html>
+
 
 
