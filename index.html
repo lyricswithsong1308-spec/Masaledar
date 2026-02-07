@@ -1,360 +1,115 @@
 <!DOCTYPE html>
-<html lang="en">c
+<html lang="en">
 <head>
-    <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#FF5722">
-
-<script>
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', function() {
-    navigator.serviceWorker.register('/service-worker.js')
-      .then(function(registration) {
-        console.log('ServiceWorker registered:', registration.scope);
-      })
-      .catch(function(error) {
-        console.log('ServiceWorker registration failed:', error);
-      });
-  });
-}
-</script>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Yujanii Store - Spices & Kitchen Accessories in Bihar</title>
-<meta name="description" content="Buy premium spices and kitchen tools online. Fast delivery in Bihar.">
-<meta name="keywords" content="masala online Bihar, spices Patna, kitchen accessories Bihar, Yujanii store, buy masala online India">
-
-<style>
-body { font-family: Arial, sans-serif; margin:0; background:#f5f5f5; }
-header { background:#ff6f00; padding:15px; display:flex; justify-content:space-between; align-items:center; color:white; flex-wrap:wrap; }
-header h1 { margin:0; }
-.navbar a { color:white; margin:0 10px; text-decoration:none; }
-.hero-carousel { position:relative; max-width:100%; overflow:hidden; }
-.hero-carousel img { width:100%; display:none; }
-.hero-carousel img.active { display:block; }
-.products { display:grid; grid-template-columns:repeat(auto-fill,minmax(200px,1fr)); gap:20px; padding:20px; }
-.product { background:#fff; padding:15px; border-radius:10px; box-shadow:0 2px 8px rgba(0,0,0,0.1); text-align:center; cursor:pointer; transition:transform 0.2s; }
-.product:hover { transform:scale(1.03); }
-.product img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
-.btn { background:#ff6f00; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-.popup { position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; visibility:hidden; opacity:0; transition:0.3s; }
-.popup.active { visibility:visible; opacity:1; }
-.popup-content { background:white; padding:20px; border-radius:12px; max-width:400px; text-align:left; box-shadow:0 5px 15px rgba(0,0,0,0.2); }
-.popup-content img { width:100%; border-radius:8px; }
-.popup-content h2 { margin:10px 0; }
-.close-btn { background:red; color:white; border:none; padding:6px 12px; border-radius:5px; float:right; cursor:pointer; }
-footer { background-color:#333; color:#fff; padding:20px 0; text-align:center; font-family:Arial, sans-serif; }
-footer a { color:#1a73e8; text-decoration:none; margin:0 10px; }
-.search-box { position:relative; }
-.search-box input { padding:6px 10px; border-radius:6px; border:none; width:180px; }
-#search-suggestions { position:absolute; top:35px; left:0; background:white; border:1px solid #ccc; max-height:200px; overflow-y:auto; width:180px; display:none; z-index:1000; }
-.suggestion-item { padding:5px; cursor:pointer; }
-.suggestion-item:hover { background:#f0f0f0; }
-.cart-icon { cursor:pointer; font-size:20px; position:relative; margin-left:10px; }
-.cart-count { position:absolute; top:-8px; right:-8px; background:white; color:#ff6f00; font-size:12px; border-radius:50%; padding:2px 6px; font-weight:bold; }
-
-/* Cart Sidebar */
-#cart-sidebar { 
-    position: fixed; 
-    top: 0; 
-    right: -350px; 
-    width: 350px; 
-    height: 100%; 
-    background: #fff; 
-    box-shadow: -3px 0 8px rgba(0,0,0,0.2); 
-    transition: right 0.4s ease; 
-    z-index: 10000; 
-    padding: 20px; 
-    overflow-y: auto; 
-}
-#cart-sidebar.active { right: 0; }
-#cart-sidebar h2 { margin-top:0; }
-.cart-item { margin-bottom:15px; }
-.cart-item button { margin-left:5px; cursor:pointer; }
-
-/* Overlay */
-#cart-overlay {
-    position: fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background: rgba(0,0,0,0);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.4s ease, background 0.4s ease;
-    z-index: 9999;
-}
-#cart-overlay.active {
-    opacity: 1;
-    visibility: visible;
-    background: rgba(0,0,0,0.5);
-}
-
-/* Blog Section */
-.blog-container { display:grid; grid-template-columns:repeat(auto-fill,minmax(250px,1fr)); gap:20px; padding:20px; }
-.blog-post { background: #f9f9f9; padding: 15px; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s; cursor: pointer; }
-.blog-post:hover { transform: scale(1.02); }
-.blog-post img { width:100%; height:150px; object-fit:cover; border-radius:8px; }
-.blog-post h3 { margin:10px 0 5px 0; }
-.blog-post p { font-size:14px; color:#555; }
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jayu Stores | Premium Masala & Makhana</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .glass { background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(10px); }
+        .hero-gradient { background: radial-gradient(circle at top right, #fff5f0, #ffffff); }
+    </style>
 </head>
-<body>
+<body class="hero-gradient text-slate-900">
 
-<header>
-<h1>🛒 Yujanii Store</h1>
-<div class="search-box">
-<input type="text" id="search" placeholder="Search products...">
-<div id="search-suggestions"></div>
-<span class="cart-icon">🛒<span class="cart-count" id="cart-count">0</span></span>
-</div>
-<nav class="navbar">
-<a href="index.html">Home</a>
-<a href="products.html">Products</a>
-<a href="contact.html">Contact</a>
-<a href="terms.html">Terms</a>
-<a href="privacy.html">Privacy</a>
-</nav>
-</header>
-
-
-    
-
-<div class="products" id="product-list"></div>
-
-<!-- Blog Section -->
-<section id="blog" style="background:#fff; padding:20px;">
-    <h2 style="text-align:center; margin-bottom:20px;">📖 Our Blog</h2>
-    <div class="blog-container"></div>
-</section>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-<button class="close-btn" onclick="closePopup()">X</button>
-<img id="popup-img" src="">
-<h2 id="popup-title"></h2>
-<p id="popup-desc"></p>
-<button class="btn" onclick="addToCartFromPopup()">Add to Cart</button>
-</div>
-</div>
-
-<!-- Blog Popup -->
-<div class="popup" id="blog-popup">
-<div class="popup-content">
-<button class="close-btn" onclick="closeBlogPopup()">X</button>
-<img id="blog-popup-img" src="">
-<h2 id="blog-popup-title"></h2>
-<p id="blog-popup-content"></p>
-</div>
-</div>
-
-<!-- Cart Overlay -->
-<div id="cart-overlay" onclick="closeCart()"></div>
-
-<!-- Cart Sidebar -->
-<div id="cart-sidebar">
-<h2>🛒 Your Cart</h2>
-<button style="float:right; cursor:pointer;" onclick="closeCart()">X</button>
-<div id="cart-items"></div>
-<hr>
-<p><strong>Total: ₹<span id="cart-total">0</span></strong></p>
-<button class="btn" onclick="checkout()">Checkout</button>
-</div>
-
-<footer>
-<p>&copy; 2025 Yujanii Store. All rights reserved.</p>
-<p>
-<a href="privacy.html">Privacy Policy</a> |
-<a href="terms.html">Terms & Conditions</a> |
-<a href="contact.html">Contact Us</a>
-</p>
-<p>Follow us:
-<a href="https://instagram.com">Instagram</a> |
-<a href="https://facebook.com">Facebook</a>
-</p>
-</footer>
-
-<script>
-// Products Array
-const products = [
-{id:1, name:"Turmeric", price:50, img:"images/turmeric-root-and-powder.jpg"},
-{id:2, name:"Jeera", price:70, img:"images/cumin.jpg", desc:"Premium cumin seeds from Rajasthan."},
-{id:3, name:"Cinnamon", price:90, img:"images/Benefits of cinnamon.jpg", desc:"Organic cinnamon sticks from Kerala."},
-{id:4, name:"Cloves", price:80, img:"images/images.jpg", desc:"Fresh cloves harvested from Kerala."},
-{id:5, name:"Cardamom", price:120, img:"images/cardamom-seed-pods.webp", desc:"Green cardamom pods from Sikkim."},
-{id:6, name:"Mustard Seeds", price:40, img:"images/images (2).jpg", desc:"Yellow mustard seeds from Bihar."},
-{id:7, name:"Coriander Seeds", price:60, img:"images/images (1).jpg", desc:"Coriander seeds from Madhya Pradesh."},
-{id:8, name:"Fennel Seeds", price:55, img:"images/1400x1400_2_32c08d22-f455-47c7-bea7-568763a41203_1200x1200.webp", desc:"Fennel seeds from Gujarat."},
-{id:10, name:"Saffron", price:1500, img:"images/0001493_saffron-powder-bits-and-pieces-of-red-stigmas-100-gm_510.jpeg", desc:"Premium saffron from Kashmir."},
-{id:11, name:"Salt", price:30, img:"images/images (3).jpg", desc:"Himalayan pink salt."}
-];
-
-// Cart
-let cart = JSON.parse(localStorage.getItem("cart")) || [];
-updateCartCount();
-
-// Render products
-function renderProducts(list) {
-    document.getElementById("product-list").innerHTML = list.map(p=>`
-    <div class="product" onclick="openPopup(${p.id})">
-        <img src="${p.img}" alt="${p.name}">
-        <h3>${p.name}</h3>
-        <p>₹${p.price}</p>
-        <button class="btn" onclick="event.stopPropagation(); addToCart(${p.id})">Add to Cart</button>
-    </div>`).join("");
-}
-
-renderProducts(products);
-
-// Popup
-function openPopup(id){
-    let p=products.find(x=>x.id===id);
-    document.getElementById("popup-img").src=p.img;
-    document.getElementById("popup-title").innerText=p.name;
-    document.getElementById("popup-desc").innerText=p.desc || "";
-    document.getElementById("popup").classList.add("active");
-    localStorage.setItem("selectedProduct", JSON.stringify(p));
-}
-function closePopup(){document.getElementById("popup").classList.remove("active");}
-function addToCartFromPopup(){let p=JSON.parse(localStorage.getItem("selectedProduct")); addToCart(p.id); closePopup();}
-
-// Cart Functions
-function addToCart(id){
-    let p=products.find(x=>x.id===id);
-    let item=cart.find(x=>x.id===id);
-    if(item){item.qty++;} else {cart.push({...p,qty:1});}
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    renderCartSidebar();
-}
-function updateCartCount(){
-    document.getElementById("cart-count").innerText=cart.reduce((a,b)=>a+b.qty,0);
-}
-
-// Cart Sidebar
-const cartSidebar = document.getElementById("cart-sidebar");
-document.querySelector(".cart-icon").addEventListener("click", () => {
-    renderCartSidebar();
-    cartSidebar.classList.add("active");
-    document.getElementById("cart-overlay").classList.add("active");
-});
-function closeCart(){ 
-    cartSidebar.classList.remove("active"); 
-    document.getElementById("cart-overlay").classList.remove("active");
-}
-function renderCartSidebar() {
-    const cartItemsDiv = document.getElementById("cart-items");
-    cartItemsDiv.innerHTML = "";
-    let total = 0;
-    if(cart.length === 0){
-        cartItemsDiv.innerHTML = "<p>Your cart is empty.</p>";
-    } else {
-        cart.forEach(item => {
-            total += item.price * item.qty;
-            cartItemsDiv.innerHTML += `
-            <div class="cart-item">
-                <strong>${item.name}</strong><br>
-                ₹${item.price} x 
-                <button onclick="decreaseQty(${item.id})">-</button>
-                ${item.qty}
-                <button onclick="increaseQty(${item.id})">+</button>
-                <button onclick="removeFromCart(${item.id})">❌</button>
-            </div>`;
-        });
-    }
-    document.getElementById("cart-total").innerText = total;
-}
-function removeFromCart(id){
-    cart = cart.filter(item => item.id !== id);
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    renderCartSidebar();
-}
-function increaseQty(id){
-    let item = cart.find(x=>x.id===id);
-    if(item){ item.qty++; }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    renderCartSidebar();
-}
-function decreaseQty(id){
-    let item = cart.find(x=>x.id===id);
-    if(item && item.qty>1){ item.qty--; }
-    else if(item && item.qty===1){ removeFromCart(id); return; }
-    localStorage.setItem("cart", JSON.stringify(cart));
-    updateCartCount();
-    renderCartSidebar();
-}
-function checkout(){ window.location.href="checkout.html"; }
-
-// Search Suggestions
-const searchInput = document.getElementById("search");
-const suggestionsBox = document.getElementById("search-suggestions");
-
-searchInput.addEventListener("input", e => {
-    let term = e.target.value.toLowerCase();
-    if(term === "") { suggestionsBox.style.display="none"; renderProducts(products); return; }
-    let matches = products.filter(p => p.name.toLowerCase().includes(term) || (p.desc && p.desc.toLowerCase().includes(term)));
-    renderProducts(matches);
-    suggestionsBox.innerHTML = matches.map(p => `<div class="suggestion-item" onclick="selectSuggestion('${p.name}')">${p.name}</div>`).join("");
-    suggestionsBox.style.display = matches.length ? "block" : "none";
-});
-function selectSuggestion(name) {
-    searchInput.value = name;
-    suggestionsBox.style.display="none";
-    let filtered = products.filter(p => p.name === name);
-    renderProducts(filtered);
-}
-document.addEventListener("click", e => {
-    if(!searchInput.contains(e.target) && !suggestionsBox.contains(e.target)){
-        suggestionsBox.style.display="none";
-    }
-});
-
-// Hero carousel
-let heroIndex=0; 
-const slides=document.querySelectorAll('.hero-carousel img'); 
-function showSlide(){
-    slides.forEach(s=>s.classList.remove('active')); 
-    slides[heroIndex].classList.add('active'); 
-    heroIndex=(heroIndex+1)%slides.length;
-} 
-setInterval(showSlide,4000);
-
-// Blog Array
-const blogs = [
-{id:1, title:"5 Health Benefits of Turmeric", img:"images/blog_turmeric.jpg", content:"Turmeric is known for its anti-inflammatory properties and can boost immunity..."},
-{id:2, title:"How to Store Spices for Maximum Freshness", img:"images/blog_spice_storage.jpg", content:"Proper storage of spices ensures long-lasting flavor and aroma..."},
-{id:3, title:"Top 10 Spices Every Kitchen Needs", img:"images/blog_top10.jpg", content:"From cumin to saffron, discover the essential spices for any home cook..."}
-];
-
-// Render Blogs
-function renderBlogs() {
-    const blogContainer = document.querySelector(".blog-container");
-    blogContainer.innerHTML = blogs.map(blog => `
-        <div class="blog-post" onclick="openBlog(${blog.id})">
-
-          
-            <h3>${blog.title}</h3>
-            <p>${blog.content.substring(0,80)}...</p>
+    <nav class="flex justify-between items-center px-8 py-6 max-w-7xl mx-auto">
+        <div class="text-2xl font-extrabold tracking-tighter text-orange-600">JAYU<span class="text-slate-800">STORES</span></div>
+        <div class="hidden md:flex gap-8 font-medium text-slate-600">
+            <a href="#" class="hover:text-orange-600 transition">Shop</a>
+            <a href="#" class="hover:text-orange-600 transition">Our Story</a>
+            <a href="#" class="hover:text-orange-600 transition">Bulk Orders</a>
         </div>
-    `).join("");
-}
-renderBlogs();
+        <button class="bg-slate-900 text-white px-6 py-2.5 rounded-full font-semibold hover:bg-orange-600 transition shadow-lg">
+            Cart (0)
+        </button>
+    </nav>
 
-// Blog Popup
-function openBlog(id){
-    const blog = blogs.find(b=>b.id===id);
-    document.getElementById("blog-popup-img").src = blog.img;
-    document.getElementById("blog-popup-title").innerText = blog.title;
-    document.getElementById("blog-popup-content").innerText = blog.content;
-    document.getElementById("blog-popup").classList.add("active");
-}
-function closeBlogPopup(){ document.getElementById("blog-popup").classList.remove("active"); }
-</script>
+    <section class="max-w-7xl mx-auto px-8 py-16 md:py-24 grid md:grid-cols-2 gap-12 items-center">
+        <div>
+            <span class="bg-orange-100 text-orange-700 px-4 py-1.5 rounded-full text-sm font-bold tracking-wide uppercase">
+                100% Organic & Pure
+            </span>
+            <h1 class="text-6xl md:text-7xl font-extrabold mt-6 leading-[1.1] tracking-tight">
+                Authentic Spices, <br><span class="text-orange-600">Modern Living.</span>
+            </h1>
+            <p class="mt-6 text-lg text-slate-600 leading-relaxed max-w-md">
+                Elevate your daily meals with hand-picked Masalas and premium Roasted Makhana. No chemicals, just pure nature.
+            </p>
+            <div class="mt-10 flex gap-4">
+                <button class="bg-orange-600 text-white px-8 py-4 rounded-2xl font-bold text-lg hover:scale-105 transition shadow-2xl shadow-orange-200">
+                    Order Now
+                </button>
+                <button class="border-2 border-slate-200 px-8 py-4 rounded-2xl font-bold text-lg hover:bg-slate-50 transition">
+                    View Catalog
+                </button>
+            </div>
+        </div>
+        
+        <div class="relative">
+            <div class="w-full h-[400px] bg-orange-200 rounded-[40px] overflow-hidden shadow-2xl rotate-3 hover:rotate-0 transition-all duration-500">
+                <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover" alt="Spices">
+            </div>
+            <div class="absolute -bottom-6 -left-6 glass p-6 rounded-3xl shadow-xl border border-white">
+                <p class="text-sm font-bold text-slate-500">Bestseller</p>
+                <p class="text-xl font-extrabold">Shahi Paneer Masala</p>
+                <p class="text-orange-600 font-bold">₹149</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="max-w-7xl mx-auto px-8 py-20">
+        <div class="flex justify-between items-end mb-12">
+            <div>
+                <h2 class="text-4xl font-extrabold">Our Favorites</h2>
+                <p class="text-slate-500 mt-2">The most loved items this month</p>
+            </div>
+            <a href="#" class="text-orange-600 font-bold border-b-2 border-orange-600">See All</a>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="group cursor-pointer">
+                <div class="aspect-square bg-slate-100 rounded-3xl mb-4 overflow-hidden relative">
+                   <div class="absolute inset-0 flex items-center justify-center text-slate-400 font-bold">Makhana Image</div>
+                   <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur py-3 text-center rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 font-bold">Quick Add +</div>
+                </div>
+                <h3 class="text-xl font-bold">Peri Peri Makhana</h3>
+                <p class="text-slate-500 font-medium">Spicy & Crunchy</p>
+                <p class="text-lg font-extrabold mt-1">₹199</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="aspect-square bg-slate-100 rounded-3xl mb-4 overflow-hidden relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 font-bold">Masala Image</div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur py-3 text-center rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 font-bold">Quick Add +</div>
+                </div>
+                <h3 class="text-xl font-bold">Turmeric Powder</h3>
+                <p class="text-slate-500 font-medium">High Curcumin</p>
+                <p class="text-lg font-extrabold mt-1">₹85</p>
+            </div>
+
+            <div class="group cursor-pointer">
+                <div class="aspect-square bg-slate-100 rounded-3xl mb-4 overflow-hidden relative">
+                    <div class="absolute inset-0 flex items-center justify-center text-slate-400 font-bold">Masala Image</div>
+                    <div class="absolute bottom-4 left-4 right-4 bg-white/90 backdrop-blur py-3 text-center rounded-xl opacity-0 group-hover:opacity-100 transition duration-300 font-bold">Quick Add +</div>
+                </div>
+                <h3 class="text-xl font-bold">Kitchen King Masala</h3>
+                <p class="text-slate-500 font-medium">All-purpose Magic</p>
+                <p class="text-lg font-extrabold mt-1">₹120</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-400 py-12 px-8 text-center">
+        <p class="text-white font-bold mb-4">JAYU STORES © 2024</p>
+        <p class="text-sm">Made with ❤️ for authentic Indian taste.</p>
+    </footer>
+
 </body>
 </html>
+
+
 
 
 
